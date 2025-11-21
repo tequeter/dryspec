@@ -10,7 +10,7 @@ Good specifications:
 - Must not leave room for architectural improvisation. Yet must not be over-specified (see previous point) - good coding models will handle minor decisions properly without having everything written down prior.
 - Must be made of loosely coupled files loaded into the LLM's context as needed. Each file must have high cohesion.
 - Must distinguish internal semantics (error types, conditions) from external presentation such as UX vernacular.
-- Must include sparse, high-signal, canonical test cases to complement the concise prose.
+- Must include sparse, high-signal, acceptance test scenarios to complement the concise prose.
 - Must have a size limit on each file to force concision, test sparseness, and module cohesion.
 - Must not produce incremental "specification patches" (neither as a "notes" chapter nor as extra files). They will become outdated quickly and bloat the LLM context. Instead, refactor destructively the existing specifications as required, without losing existing detail. Their history is forever available through Git.
 
@@ -46,29 +46,45 @@ The agent SHALL NOT edit the Constitution without an explicit request from the u
 #### Specification index
 
 > You may read the software specifications here:
-> - `docs/req-*.md` for user-visible features or library interface.
+> - `docs/fr-*.md` for user-visible features or library interface.
+> - `docs/nfr.md` for non-functional requirements.
 > - `docs/glossary.md` (optional).
 > - `docs/architecture.md` (optional).
 > - `docs/sub-*.md` for the major internal software components.
 
-### Requirements
+### Functional Requirements
 
-The software must have requirements documented as `docs/req-*.md`. This is the What and Why.
+The software SHALL have functional requirements documented as `docs/fr-*.md`. This is the What and Why.
 
-For an application, do specify the major, user-visible requirements.
-
-For a library, do specify the interface.
-
-Do not specify anything else as requirements.
+- For an application, do specify the major, user-visible requirements.
+- For a library, do specify the interface.
+- Do not specify anything else as functional requirements.
 
 Requirements typically have:
 
 1. A description from the point of view of the user.
-2. High-level test cases, again from the point of view of the user. May use the Gherkin structure.
+2. Acceptance scenarios, again from the point of view of the user. MAY use the Gherkin structure. SHALL have an identifier to reference in associated executable tests.
 
-Both combined must describe the expected behavior unambiguously, including the error conditions.
+Both combined SHALL describe the expected behavior unambiguously, including the error conditions.
 
-The agent SHALL suggest consistent and semantically meaningful names for the files (no `docs/req-core.md`).
+The agent SHALL suggest consistent and semantically meaningful names for the files (no `docs/fr-core.md`).
+
+The file name unambiguously identifies the FR. There SHALL NOT be a different identifier listed inside the file.
+
+#### Non-functional Requirements
+
+The software SHALL have non-functional requirements documented as `docs/nfr.md`. This is a single file for ease of loading into a coding agent's context.
+
+To allow deep hyperlinking, individual NFRs must have simple, immutable headings.
+
+Common NFR categories include:
+
+- Performance
+- Reliability, availability, maintainability and safety
+- Scalability
+- Testability
+
+See also: [Non-functional requirement](https://en.wikipedia.org/wiki/Non-functional_requirement) on Wikipedia.
 
 ### Glossary
 
@@ -101,6 +117,10 @@ It SHALL NOT include subsystem code, pseudo-code, or anything of that sort.
 ### Other files
 
 The user MAY create other files under `docs/`.
+
+## Cross-repository support
+
+Software that spans multiple repositories MAY cross-link to other repos through canonical URLs.
 
 
 ## Workflows
@@ -184,8 +204,3 @@ And the above slash-commands guiding each workflow.
 | Claude Code | Skills | [UI](UI-Claude.md) |
 | Codex | Slash-commands only | [UI](UI-slash.md) |
 | Web chats | Self-contained prompt | [UI](UI-web.md) |
-
-
-## TODO
-
-- Can LeanSDD be recursive?
