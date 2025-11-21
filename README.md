@@ -25,9 +25,9 @@ OpenSpec is interesting but spends a lot of effort & tokens duplicating what Git
 
 You will have these layers:
 
-1. Formal specification documenting functional Requirements.
-2. Formal specification documenting technical aspects.
-3. Implicit specification as executable tests, internal interfaces etc.
+1. Formal specifications documenting functional Requirements.
+2. Formal specifications documenting technical aspects.
+3. Implicit specifications as executable tests, internal interfaces etc.
 4. Transient specifications with the agent for the duration of the coding session.
 
 LeanSDD only cares about 1 and 2.
@@ -40,11 +40,11 @@ The Constitution is always loaded into the context, for all agents, so it is par
 
 1. A short description of the program in one paragraph. What the software does (features), why, what problem it solves.
 2. Code best practices.
-3. A specification index provided below.
+3. A generic specification index provided below.
 
 The user provides the Constitution (the description is quick to write, and the best practices are supposedly already identified before the project).
 
-The agent is forbidden to edit the Constitution without an explicit request from the user.
+The agent SHALL NOT edit the Constitution without an explicit request from the user.
 
 #### Specification index
 
@@ -70,6 +70,8 @@ Requirements typically have:
 2. High-level test cases, again from the point of view of the user. May use the Gherkin structure.
 
 Both combined must describe the expected behavior unambiguously, including the error conditions.
+
+The agent SHALL suggest consistent and semantically meaningful names for the files (no `docs/req-core.md`).
 
 ### Glossary
 
@@ -108,38 +110,41 @@ The workflows below feature instructions to alter the Git state (`git stage`, `g
 
 NB: the user MAY of course perform intermediate commits instead of just staging the changes.
 
-### Brownfield
+The workflows aggressively optimize the context when the AI runtime permits it, as this produces better results and costs less tokens.
 
-For an existing project,
+### Brownfield (`/lsdd-brownfield`)
+
+For an existing project, from the perspective of the user,
 - Start with a clean Git state.
 - Complete your Constitution.
-- Starting with an empty context, load LeanSDD, then identify the Subsystems with the help of the agent (clear the context between each).
-- Likewise for the Architecture.
-- And for Glossary entries and Requirements.
+- Load LeanSDD and let the agent explore the codebase.
+    - If your AI runtime permits it, use a dedicated context (sub-agent, sub-task) to deep-dive into each Subsystem.
+    - The sub-agent SHALL document the Subsystem, asking clarifying questions as necessary.
+    - The sub-agent SHALL return Architecture, Requirements, and Glossary concise observations to the calling agent.
+    - In particular, Requirements are hard to reverse-engineer. The sub-agent SHALL stop at identifying possible Requirements and SHALL NOT attempt describing them fully.
+- Have the calling agent document the observed Architecture and Glossary, again asking questions as necessary. Also init the Requirements files with what was collected.
+- Using a clean context again, document the Requirements. Reload (just) the necessary context using `git diff`. The agent MAY suggest iterating on the init'ed Requirement files.
+    - If your AI runtime permits it, use a dedicated context to flesh out each Requirement.
 - Stage your changes.
 - Clear and load LeanSDD again, then ask the agent to critique your specification, looking for inconsistencies. Fix as needed.
 - Commit.
 
-### Greenfield
+### Greenfield (`/lsdd-greenfield`)
 
-Creating a new project (greenfield deployment) just means filling in the Constitution as described above.
+Creating a new project (greenfield deployment) just means filling in the Constitution as described above. The 
 
-Suggested next steps are:
-- Creating a Glossary and specifying the Architecture.
-- Describing Requirements and Subsystems.
-
-Those are covered by the Specification-Driven Change workflow below.
+Then use the Specification-Driven Change workflow below to create the rest of the specification.
 
 
-### Specification-Driven Change
+### Specification-Driven Change (`/lsdd-change`)
 
-This is the main workflow, and it SHOULD be used for all non-trivial changes.
+This is the main workflow, and the user SHOULD use it for all non-trivial changes.
 
 The agent SHALL interact with and guide the user through creating or updating the specification as per the above framework.
 
 If useful for the task at hand, the agent SHOULD gather context using the provided tools and ask as many clarifying questions as necessary to the user.
 
-For the user, the change workflow should be as follows:
+From the perspective of the user;
 - Start with a clean Git state.
 - If requirements need to be updated, start with an empty context, load LeanSDD, and update the Requirements and possibly the Glossary with the help of the agent.
 - Clear the context again, load LeanSDD, and update the Architecture and/or the Subsystems with the help of the agent. Tell the agent to look at `git diff` if you changed anything in the previous step.
@@ -149,7 +154,7 @@ For the user, the change workflow should be as follows:
 - Commit.
 
 
-### Code-Driven Change
+### Code-Driven Change (`/lsdd-code-change`)
 
 This workflow is useful when either the user skipped the specification part, or for a bugfix that didn't seem to warrant touching the specifications.
 
@@ -161,7 +166,7 @@ Either way,
 
 ## Installation
 
-LeanSDD aims at being as being as simple as possible. It features no CLI command, and only a limited amount of configuration in your AI agent that you'll perform yourself.
+LeanSDD aims at being as being as simple as possible. It features no CLI tool, and only a limited amount of configuration in your AI agent that you'll perform yourself.
 
 ## UI
 
@@ -169,14 +174,14 @@ When the dev agent allows it, LeanSDD comes with two personae (modes, skills etc
 - "Spec Author (LeanSDD)" (slug: lsdd-author)
 - "Spec Critic (LeanSDD)" (slug: lsdd-critic)
 
-And `/lsdd-brownfield`, `/lsdd-greenfield`, `/lsdd-change`, `/lsdd-code-change` slash-commands to guide the user through the workflows.
+And the above slash-commands guiding each workflow.
 
 | Agent | Approach | Documentation |
 |---|---|---|
-| RooCode, Cline, Kilo | Modes | [UI-modes.md] |
-| Claude Code | Skills | [UI-Claude.md] |
-| Codex | Slash-commands only | [UI-slash.md] |
-| Web chats | Self-contained prompt | [UI-web.md] |
+| RooCode, Cline, Kilo | Modes | [UI](UI-modes.md) |
+| Claude Code | Skills | [UI](UI-Claude.md) |
+| Codex | Slash-commands only | [UI](UI-slash.md) |
+| Web chats | Self-contained prompt | [UI](UI-web.md) |
 
 ## TODO
 
