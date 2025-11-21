@@ -1,25 +1,21 @@
 # LeanSDD
 
-## Discussion
+## Agile specifications
 
 The specifications are a golden guardrail for the AI dev agent that would otherwise get lost during the implementation phase.
 
 Good specifications:
 
-- Must be concise, short, and dense: AI tends to be overly verbose and that's not required for a decent coder model. Huge specifications eat up the context, are harder to maintain, and produce little value.
+- Must be DRY, concise, short, and dense: AI tends to be overly verbose and that's not required for a decent coder model. Huge specifications eat up the context, are harder to maintain, and produce little value.
 - Must not leave room for architectural improvisation. Yet must not be over-specified (see previous point) - good coding models will handle minor decisions properly without having everything written down prior.
-- Must be DRY: duplicated information is harder to keep consistent when updating the spec.
 - Must be made of loosely coupled files loaded into the LLM's context as needed. Each file must have high cohesion.
 - Must distinguish internal semantics (error types, conditions) from external presentation such as UX vernacular.
 - Must include sparse, high-signal, canonical test cases to complement the concise prose.
 - Must have a size limit on each file to force concision, test sparseness, and module cohesion.
-- Must not produce incremental "specification patches" (neither as a "notes" chapter nor as extra files). They will become outdated quickly and bloat the LLM context. Instead, refactor destructively the existing specifications as required, without losing existing detail.
+- Must not produce incremental "specification patches" (neither as a "notes" chapter nor as extra files). They will become outdated quickly and bloat the LLM context. Instead, refactor destructively the existing specifications as required, without losing existing detail. Their history is forever available through Git.
 
-The workflows and the specifications must be optimized for the incremental changes that come with agile practices, rather than clinging to the obsolete waterfall model.
+The workflows and the specifications must be optimized for the incremental changes that come with agile practices, rather than clinging to the obsolete waterfall model. See also [Existing SDD Frameworks](FAQ.md#existing-sdd-frameworks).
 
-Existing practice (SpecKit, BMAD, ...) seems to focus on the wrong problems: how to create more text (input specs, various lessons learned post-implementation,  ...) and shovel it around. It's just a busywork trap, creating more structure instead of better structure. They completely miss the point of having lean and DRY specifications that can evolve ahead of the code.
-
-OpenSpec is interesting but spends a lot of effort & tokens duplicating what Git already does well, while it falls short of specifying what goes in the specifications and critiquing the end result for coherency.
 
 ## Specification layers
 
@@ -27,10 +23,11 @@ You will have these layers:
 
 1. Formal specifications documenting functional Requirements.
 2. Formal specifications documenting technical aspects.
-3. Implicit specifications as executable tests, internal interfaces etc.
+3. Implicit specifications such as unit tests, internal interfaces etc.
 4. Transient specifications with the agent for the duration of the coding session.
 
-LeanSDD only cares about 1 and 2.
+LeanSDD only cares about the first two.
+
 
 ## Specification structure
 
@@ -75,7 +72,9 @@ The agent SHALL suggest consistent and semantically meaningful names for the fil
 
 ### Glossary
 
-The software SHOULD have a `docs/glossary.md` defining the non-obvious terms used throughout the specification and code.
+The software SHOULD have a `docs/glossary.md` concisely defining the non-obvious terms and domain concepts used throughout the specification, code, and UI.
+
+The Glossary SHALL NOT be used as a UI phrase-book.
 
 ### Architecture
 
@@ -89,15 +88,15 @@ We call subsystems the major internal software components (modules, packages, cr
 
 Each subsystem must be specified as `docs/sub-*.md`.
 
-The file must at least contain a description of what the subsystem does and of its major components.
+The file SHALL at least contain a description of what the subsystem does.
 
-It MAY additionally:
-1. Describe the architecture and technical choices.
-2. Name the major classes, functions etc. part of its internal interface (from one subsystem to another).
+Additionally:
+1. It MAY describe the architecture and technical choices.
+2. It SHOULD name the major classes, functions etc. part of its internal interface (from one subsystem to another).
 
-It SHALL not further describe the internal interface (methods, function arguments etc.). That information can be obtained in more effective ways (codebase index) and is subject to change in every refactor.
+It SHALL NOT further describe the internal interface (methods, function arguments etc.). That information can be obtained in more effective ways (codebase index) and is subject to change in every refactor.
 
-It SHALL not include subsystem code, pseudo-code, or anything of that sort.
+It SHALL NOT include subsystem code, pseudo-code, or anything of that sort.
 
 ### Other files
 
@@ -106,32 +105,36 @@ The user MAY create other files under `docs/`.
 
 ## Workflows
 
-The workflows below feature instructions to alter the Git state (`git stage`, `git commit`). The agent MAY execute them, but the user SHOULD carefully OK each such attempt.
+About Git usage:
+- LeanSDD leverages Git to track ongoing changes and protect them from editing/AI mishaps.
+- Protection is typically done by staging (`git add`), but the user may perform an intermediate commit instead.
+- All workflows assume an initial **clean Git state** unless noted. The agent SHOULD check for it.
+- The workflows feature instructions to alter the Git state (`git stage`, `git commit`). The agent MAY execute them, but the user SHOULD carefully OK each such attempt.
 
-NB: the user MAY of course perform intermediate commits instead of just staging the changes.
+About context management:
+- The workflows use minimal, focused contexts scoped to the current step when possible. This produces better results and saves tokens.
 
-The workflows aggressively optimize the context when the AI runtime permits it, as this produces better results and costs less tokens.
+"Loading LeanSDD" (into the LLM context) may mean changing mode, entering a slash-command etc., [depending on your AI runtime](#ui).
 
 ### Brownfield (`/lsdd-brownfield`)
 
 For an existing project, from the perspective of the user,
-- Start with a clean Git state.
 - Complete your Constitution.
 - Load LeanSDD and let the agent explore the codebase.
-    - If your AI runtime permits it, use a dedicated context (sub-agent, sub-task) to deep-dive into each Subsystem.
+    - You SHOULD use a dedicated context (sub-agent, sub-task) to deep-dive into each Subsystem.
     - The sub-agent SHALL document the Subsystem, asking clarifying questions as necessary.
     - The sub-agent SHALL return Architecture, Requirements, and Glossary concise observations to the calling agent.
     - In particular, Requirements are hard to reverse-engineer. The sub-agent SHALL stop at identifying possible Requirements and SHALL NOT attempt describing them fully.
 - Have the calling agent document the observed Architecture and Glossary, again asking questions as necessary. Also init the Requirements files with what was collected.
 - Using a clean context again, document the Requirements. Reload (just) the necessary context using `git diff`. The agent MAY suggest iterating on the init'ed Requirement files.
     - If your AI runtime permits it, use a dedicated context to flesh out each Requirement.
+    - The Requirements identified through codebase exploration are just a starting point and will need heavy editing by the user.
 - Stage your changes.
 - Clear and load LeanSDD again, then ask the agent to critique your specification, looking for inconsistencies. Fix as needed.
-- Commit.
 
 ### Greenfield (`/lsdd-greenfield`)
 
-Creating a new project (greenfield deployment) just means filling in the Constitution as described above. The 
+Creating a new project (greenfield deployment) just means filling in the Constitution as described above.
 
 Then use the Specification-Driven Change workflow below to create the rest of the specification.
 
@@ -145,13 +148,11 @@ The agent SHALL interact with and guide the user through creating or updating th
 If useful for the task at hand, the agent SHOULD gather context using the provided tools and ask as many clarifying questions as necessary to the user.
 
 From the perspective of the user;
-- Start with a clean Git state.
 - If requirements need to be updated, start with an empty context, load LeanSDD, and update the Requirements and possibly the Glossary with the help of the agent.
 - Clear the context again, load LeanSDD, and update the Architecture and/or the Subsystems with the help of the agent. Tell the agent to look at `git diff` if you changed anything in the previous step.
-- Once satisfied with the spec update, stage it for protection (`git add`).
-- Depending on your confidence level, clear the context and have LeanSDD critique your changes. Stage again.
+- Once satisfied with the spec update, stage it for protection.
+- You SHOULD now clear the context and have LeanSDD critique your changes. Stage again.
 - Implement the change with a Coder agent, pointing it at the staged specification changes.
-- Commit.
 
 
 ### Code-Driven Change (`/lsdd-code-change`)
@@ -160,13 +161,14 @@ This workflow is useful when either the user skipped the specification part, or 
 
 Either way,
 - Start with your code changes (and nothing else) staged in Git.
-- Ask LeanSDD (critique mode, if there is such a thing) to look for inconsistencies between your staged code changes and the existing specifications.
-- Fix as you see fit, possibly using a new context depending on the situation.
-- Commit.
+- Ask LeanSDD Spec Critic to look for inconsistencies between your staged code changes and the existing specifications.
+- Fix as you see fit, possibly using a new context depending on the situation. If using an agent, it SHALL ask the user when faced with conflicts.
+
 
 ## Installation
 
 LeanSDD aims at being as being as simple as possible. It features no CLI tool, and only a limited amount of configuration in your AI agent that you'll perform yourself.
+
 
 ## UI
 
@@ -182,6 +184,7 @@ And the above slash-commands guiding each workflow.
 | Claude Code | Skills | [UI](UI-Claude.md) |
 | Codex | Slash-commands only | [UI](UI-slash.md) |
 | Web chats | Self-contained prompt | [UI](UI-web.md) |
+
 
 ## TODO
 
