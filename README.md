@@ -46,6 +46,7 @@ The agent SHALL NOT edit the Constitution without an explicit request from the u
 #### Specification index
 
 > You may read the software specifications here:
+>
 > - `docs/fr-*.md` for user-visible features or library interface.
 > - `docs/nfr.md` for non-functional requirements.
 > - `docs/glossary.md` (optional).
@@ -107,6 +108,7 @@ Each subsystem must be specified as `docs/sub-*.md`.
 The file SHALL at least contain a description of what the subsystem does.
 
 Additionally:
+
 1. It MAY describe the architecture and technical choices.
 2. It SHOULD name the major classes, functions etc. part of its internal interface (from one subsystem to another).
 
@@ -126,12 +128,14 @@ Software that spans multiple repositories MAY cross-link to other repos through 
 ## Workflows
 
 About Git usage:
+
 - LeanSDD leverages Git to track ongoing changes and protect them from editing/AI mishaps.
 - Protection is typically done by staging (`git add`), but the user may perform an intermediate commit instead.
 - All workflows assume an initial **clean Git state** unless noted. The agent SHOULD check for it.
 - The workflows feature instructions to alter the Git state (`git stage`, `git commit`). The agent MAY execute them, but the user SHOULD carefully OK each such attempt.
 
 About context management:
+
 - The workflows use minimal, focused contexts scoped to the current step when possible. This produces better results and saves tokens.
 
 "Loading LeanSDD" (into the LLM context) may mean changing mode, entering a slash-command etc., [depending on your AI runtime](#ui).
@@ -139,6 +143,7 @@ About context management:
 ### Brownfield (`/lsdd-brownfield`)
 
 For an existing project, from the perspective of the user,
+
 - Complete your Constitution.
 - Load LeanSDD and let the agent explore the codebase.
     - You SHOULD use a dedicated context (sub-agent, sub-task) to deep-dive into each Subsystem.
@@ -167,7 +172,8 @@ The agent SHALL interact with and guide the user through creating or updating th
 
 If useful for the task at hand, the agent SHOULD gather context using the provided tools and ask as many clarifying questions as necessary to the user.
 
-From the perspective of the user;
+From the perspective of the user:
+
 - If requirements need to be updated, start with an empty context, load LeanSDD, and update the Requirements and possibly the Glossary with the help of the agent.
 - Clear the context again, load LeanSDD, and update the Architecture and/or the Subsystems with the help of the agent. Tell the agent to look at `git diff` if you changed anything in the previous step.
 - Once satisfied with the spec update, stage it for protection.
@@ -180,6 +186,7 @@ From the perspective of the user;
 This workflow is useful when either the user skipped the specification part, or for a bugfix that didn't seem to warrant touching the specifications.
 
 Either way,
+
 - Start with your code changes (and nothing else) staged in Git.
 - Ask LeanSDD Spec Critic to look for inconsistencies between your staged code changes and the existing specifications.
 - Fix as you see fit, possibly using a new context depending on the situation. If using an agent, it SHALL ask the user when faced with conflicts.
@@ -193,14 +200,15 @@ LeanSDD aims at being as being as simple as possible. It features no CLI tool, a
 ## UI
 
 When the dev agent allows it, LeanSDD comes with two personae (modes, skills etc.):
+
 - "Spec Author (LeanSDD)" (slug: lsdd-author)
 - "Spec Critic (LeanSDD)" (slug: lsdd-critic)
 
 And the above slash-commands guiding each workflow.
 
-| Agent | Approach | Documentation |
-|---|---|---|
-| RooCode, Cline, Kilo | Modes | [UI](UI-modes.md) |
-| Claude Code | Skills | [UI](UI-Claude.md) |
-| Codex | Slash-commands only | [UI](UI-slash.md) |
-| Web chats | Self-contained prompt | [UI](UI-web.md) |
+| Agent                | Approach              | Documentation      |
+| -------------------- | --------------------- | ------------------ |
+| RooCode, Cline, Kilo | Modes                 | [UI](UI-modes.md)  |
+| Claude Code          | Skills                | [UI](UI-Claude.md) |
+| Codex                | Slash-commands only   | [UI](UI-slash.md)  |
+| Web chats            | Self-contained prompt | [UI](UI-web.md)    |

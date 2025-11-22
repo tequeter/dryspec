@@ -1,17 +1,19 @@
-*As a RooCode expert, carefully study the provided context (README) and instructions and think hard to generate UI-modes.md. Do not bother with leansdd-modes.yaml.*
+---
+prompt: As a RooCode expert, carefully study the provided context (README.md) and instructions and think hard to generate UI-modes.md. Do not bother with leansdd-modes.yaml.
+---
 
 # LeanSDD UI (RooCode Modes)
 
 LeanSDD in RooCode is delivered as two modes plus a small set of slash-commands. Modes define *persona + guarantees*; slash-commands define *workflow entry points*. “Clean/empty context” steps in workflows are implemented in RooCode by running the step **in a sub-task** with the appropriate mode.  
 
-## Sample sessions (short, ellided)
+## Sample sessions (short, elided)
 
 Below, `User>` are your messages, `Agent>` are RooCode replies.
 Anything labeled “(in a sub-task)” means you open a new RooCode task in the stated mode.
 
 ### 1) Brownfield workflow (`/lsdd-brownfield`)
 
-**Goal:** reverse-engineer specs from an existing codebase, then critique them. 
+**Goal:** reverse-engineer specs from an existing codebase, then critique them.
 
 **Session**
 
@@ -46,7 +48,7 @@ Agent (Spec Critic)> “Reviewing staged diffs vs specs. Inconsistencies:
 
 ### 2) Greenfield workflow (`/lsdd-greenfield`)
 
-**Goal:** create a new project by writing the Constitution, then switch to change workflow for real work. 
+**Goal:** create a new project by writing the Constitution, then switch to change workflow for real work.
 
 **Session**
 
@@ -65,7 +67,7 @@ Agent (Spec Author)> “Use `/lsdd-change` for any non-trivial work.”
 
 ### 3) Specification-Driven Change (`/lsdd-change`)
 
-**Goal:** update specs first (Requirements → Architecture/Subsystems), then implement with a coder agent. 
+**Goal:** update specs first (Requirements → Architecture/Subsystems), then implement with a coder agent.
 
 **Session**
 
@@ -79,7 +81,7 @@ Agent> “Here are the exact edits. Please review.”
 User> Confirms.
 
 **(in a sub-task — Spec Author)**
-Agent> “Now technical layer: which subsystems/architecture need updates? I’ll read `git diff` if you changed reqs.”
+Agent> “Now technical layer: which subsystems/architecture need updates? I’ll read `git diff` if you changed requirements.”
 Agent> Updates `docs/sub-*.md` / `docs/architecture.md` minimally.
 User> stages spec.
 
@@ -95,7 +97,7 @@ User> commits.
 
 ### 4) Code-Driven Change (`/lsdd-code-change`)
 
-**Goal:** you already changed code (or specs didn’t seem needed). LeanSDD checks spec/code alignment. 
+**Goal:** you already changed code (or specs didn’t seem needed). LeanSDD checks spec/code alignment.
 
 **Session**
 
@@ -155,7 +157,7 @@ LeanSDD provides two RooCode modes. They are intentionally asymmetric.
 
 * Optimizes for concision, no fluff, no invented APIs.
 * Updates specs destructively instead of adding “patch notes.”
-* Never edits the Constitution unless explicitly asked. 
+* Never edits the Constitution unless explicitly asked.
 
 ### Spec Critic (LeanSDD) — `lsdd-critic`
 
@@ -176,3 +178,5 @@ LeanSDD provides two RooCode modes. They are intentionally asymmetric.
 * No autonomous rewrites or file creation.
 * Avoids speculative design; focuses on contradictions, gaps, unsafe ambiguity.
 * Only asks clarifying questions if absolutely required.
+
+<!-- markdownlint-disable-file MD036 -->

@@ -1,0 +1,4 @@
+# Allow multiple blanks between sections for readability
+MD012: false
+# Allow lines > 80 (default out of the box)
+MD013: false

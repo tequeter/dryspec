@@ -76,11 +76,11 @@ Analyze carefully the provided workflows. For all tasks that require a "clean", 
 
 Create or update the file `UI-modes.md` with the following structure:
 
-- A sample session for each workflow. Ellide as much as possible to keep it short.
-  - Write consistently "Spec Author" and "Spec Critic".
-  - Write "in a sub-task" (or similar), not "with clean context" - that's what the user will see in RooCode's UI.
-- Available slash-commands, when to use and what they do (assume the user already read `README.md`, keep it DRY).
-- Available modes, same thing.
+* A sample session for each workflow. Elide as much as possible to keep it short.
+  * Write consistently "Spec Author" and "Spec Critic".
+  * Write "in a sub-task" (or similar), not "with clean context" - that's what the user will see in RooCode's UI.
+* Available slash-commands, when to use and what they do (assume the user already read `README.md`, keep it DRY).
+* Available modes, same thing.
 
 ### Modes file
 
