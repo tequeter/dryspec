@@ -5,7 +5,7 @@ This document explains how to use LeanSDD from RooCode using modes and slash-com
 ## Available modes
 
 - `LeanSDD` — Agile specification coach that understands the LeanSDD framework. It focuses on FR/NFR/Glossary/Architecture/Subsystem specs under `docs/`, keeps them short and dense, and follows the Git/context rules from the Constitution.
-- `Ask` (built-in) — Large‑context code reader for deep dives into the codebase. The agent uses it from sub‑tasks when it needs to understand existing code or diffs, then bring back concise findings to `LeanSDD`.
+- `Ask` (built-in) — Large‑context mode that reads and summarizes sizable chunks of code or diffs. The agent uses it from sub‑tasks when it needs broad code context, then brings back concise findings to `LeanSDD`.
 
 ## Available slash-commands
 
@@ -27,7 +27,7 @@ Each command:
 1. Outside RooCode chat: Make sure your Constitution (for example in `AGENTS.md`/`CLAUDE.md`) exists and roughly describes the project and code best practices.
 2. In the main RooCode chat: run `/lsdd-init-existing`.
 3. LeanSDD checks `git status` and verifies that a Constitution is present; if it is missing or obviously incomplete, it asks you to pause and fix it before proceeding.
-4. LeanSDD (in a sub‑task, Ask mode) deep‑dives into a chosen subsystem directory, summarizing responsibilities, external behaviors, and candidate FR/NFR/Glossary/Architecture notes in a short, dense list.
+4. LeanSDD (in a sub‑task, Ask mode) reads and summarizes the code in a chosen subsystem directory, capturing responsibilities, external behaviors, and candidate FR/NFR/Glossary/Architecture notes in a short, dense list.
 5. Back in the main chat, LeanSDD turns those notes into concise updates for `docs/architecture.md`, `docs/sub-*.md`, and initial `docs/fr-*.md`/`docs/nfr.md`/`docs/glossary.md`, suggests staging the spec files, and may open another sub‑task in LeanSDD mode to critique the staged specs.
 
 ### Greenfield: `/lsdd-init-new`
@@ -51,5 +51,5 @@ Each command:
 1. Outside chat: stage only the relevant code changes (for example, with `git add` on source files but not specs).
 2. In the main RooCode chat: run `/lsdd-reconcile` to reconcile the staged code with the specs.
 3. LeanSDD verifies that only code (no spec files) is staged and asks which feature or bug the changes are meant to address.
-4. LeanSDD (in a sub‑task, Ask mode) uses a large context to inspect the staged diff and nearby code, summarizing behavior changes and potential impacts on existing FR/NFR/Architecture/Subsystem specs.
+4. LeanSDD (in a sub‑task, Ask mode) reads and summarizes the staged diff and nearby code using its large context, capturing behavior changes and potential impacts on existing FR/NFR/Architecture/Subsystem specs.
 5. LeanSDD (in a sub‑task, LeanSDD mode) proposes minimal, destructive edits to the affected spec files so that they match the staged code behavior, then in the main chat suggests staging the spec changes separately, runs a quick critique sub‑task, and summarizes whether to adjust code, adjust specs, or split the work.

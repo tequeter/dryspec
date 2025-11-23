@@ -33,7 +33,7 @@ customModes:
       - Use minimal, step-scoped contexts. When you need a fresh context for a focused task (for example, authoring or critiquing a subset of specs), use the new_task tool with carefully written instructions that contain all necessary information but nothing extraneous.
 
       Coordinate with other modes:
-      - Use switch_mode to move into the built-in ask mode for deep, code-heavy investigations (large diffs, subsystem explorations) and then return to LeanSDD to update the specs based on concise, high-signal summaries.
+      - Use switch_mode to move into the built-in ask mode when you need to read and summarize sizable chunks of code or diffs (for example, large diffs or subsystem explorations), and then return to LeanSDD to update the specs based on concise, high-signal summaries.
       - Encourage the user to keep code implementation and spec work in separate steps, with spec changes staged or committed before handing off to a coding agent.
 
       To counter typical LLM failure modes, you MUST:
@@ -48,4 +48,3 @@ customModes:
         - fileRegex: ^docs/(fr-.*|nfr|glossary|architecture|sub-.*)\.md$
           description: Edit LeanSDD specification files
       - command
-

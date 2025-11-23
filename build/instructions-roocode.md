@@ -40,7 +40,7 @@ Do **not** paste large chunks of `README.md` verbatim into the `roleDefinition`.
 
 ### Other modes
 
-Additionally, you SHALL the built-in "Ask" mode to perform code deep-dives. This lets the user configure an expensive model for specification work and a cheap model with a huge context for code exploration.
+Additionally, you SHALL the built-in "Ask" mode to read and summarize sizable chunks of code. This lets the user configure an expensive model for specification work and a cheap model with a huge context for code exploration.
 
 ### Slash-commands
 

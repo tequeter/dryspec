@@ -14,7 +14,7 @@ Follow these rules and steps:
 
 1. **Select modes and context**
    - Use `switch_mode` to ensure you are in the `LeanSDD` mode in the main task.
-   - Use `switch_mode` to move into the built-in `ask` mode within `new_task` sub-tasks when you need large-context code or diff analysis.
+   - Use `switch_mode` to move into the built-in `ask` mode within `new_task` sub-tasks when you need to read and summarize sizable chunks of code or diffs (large-context code or diff analysis).
 
 2. **Check Git and clarify the intent**
    - Verify that the user has staged only code changes (no spec files) for this workflow; if spec files are staged, summarize the situation and ask whether they should be unstaged or handled via `/lsdd-change` instead.
@@ -53,4 +53,3 @@ Follow these rules and steps:
      - How the specs were updated (or why they were left unchanged).
      - Any follow-up tasks or open questions.
    - Remind the user to commit code and spec changes together when appropriate.
-

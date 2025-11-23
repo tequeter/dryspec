@@ -14,7 +14,7 @@ Follow these rules and steps:
 
 1. **Select modes and context**
    - Use `switch_mode` to ensure you are in the `LeanSDD` mode for specification work.
-   - Use `switch_mode` to move into the built-in `ask` mode when you need large-context code exploration.
+   - Use `switch_mode` to move into the built-in `ask` mode when you need to read and summarize sizable chunks of code or diffs (large-context code exploration).
    - Use `new_task` whenever you need a fresh, focused context (what the UI calls "in a sub-task"), especially for:
      - Deep dives into individual subsystems.
      - Authoring or critiquing a specific subset of spec files.
