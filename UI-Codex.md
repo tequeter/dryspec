@@ -1,0 +1,169 @@
+# LeanSDD in Codex CLI
+
+LeanSDD is available in Codex CLI as the `/prompts:leansdd` slash-command. It provides a LeanSDD-aware specification coach and reviewer that helps you design, refine, and critique lightweight Agile specifications for your project, all within a single conversation.
+
+You can invoke it from any repository where you want to apply LeanSDD-style specs; the assistant understands the core LeanSDD concepts and adapts to the files and Constitution in your current project.
+
+
+## What `/prompts:leansdd` knows
+
+`/prompts:leansdd` is preloaded with LeanSDD’s key ideas:
+
+- **Constitution**
+  - Assumes your project has a “Constitution” file (typically `AGENTS.md`, `CLAUDE.md`, or similar) that is always in context.
+  - Expects the Constitution to contain a short project description, code best practices, and a project-specific “Specification index”.
+  - Treats that Constitution (and its index) as the single source of truth for where specs live and how big they should be.
+  - Will not change the Constitution unless you explicitly ask it to.
+
+- **Specification structure**
+  - Understands the standard LeanSDD spec layout:
+    - `docs/fr-*.md` for Functional Requirements (FRs).
+    - `docs/nfr.md` for Non-Functional Requirements (NFRs).
+    - `docs/glossary.md` for domain terms.
+    - `docs/architecture.md` for global architecture and technical choices.
+    - `docs/sub-*.md` for major internal subsystems.
+  - Uses the generic Specification index (file roles and size limits) as a fallback when your Constitution does not define its own, but always defers to project-specific rules.
+
+- **Agile-spec constraints**
+  - Prioritizes DRY, concise, short, and dense specs.
+  - Keeps each file cohesive and loosely coupled to others.
+  - Uses sparse, high-signal acceptance scenarios, each with a stable identifier suitable for linking from tests.
+  - Avoids incremental “patch note” sections; prefers destructive edits that leave each file as a clean, up-to-date spec.
+  - Treats detailed internal interfaces and tests (beyond acceptance scenarios) as out of scope for specs; those are left to code and test files.
+
+- **File roles and boundaries**
+  - Keeps FRs focused on user-visible behavior or public library interfaces.
+  - Keeps NFRs focused on cross-cutting qualities (performance, reliability, scalability, safety, testability).
+  - Uses the Glossary for non-obvious domain terms, not for UI copy.
+  - Uses Architecture and Subsystem specs for structural and technical choices, without going down to method signatures or code.
+  - Knows that detailed data models, external contracts (APIs, message formats), and UI wording belong in separate docs; it will not create or change such files unless you clearly ask it to.
+
+- **Git and context assumptions**
+  - Assumes Git is used to protect spec changes (e.g., via `git add`).
+  - Can work from staged diffs (`git diff --cached`), file contents, or snippets you paste into the chat.
+  - Encourages small, focused contexts: a single FR file, a couple of related specs, or a modest diff at a time.
+
+
+## How to use `/prompts:leansdd`
+
+Call `/prompts:leansdd` followed by a short description of what you want. The text after the command is treated as the main task description; the assistant will ask a few clarifying questions only when needed and then respond concisely.
+
+You stay in the same conversation the whole time: `/prompts:leansdd` does not create modes or subtasks. You can paste files, diffs, or summaries as needed, and ask follow-up questions or new tasks in the same chat.
+
+Below are common task types and example interactions.
+
+
+### Draft or refine a Constitution
+
+Use this when bootstrapping LeanSDD for a project or tightening an existing Constitution.
+
+**Example**
+
+- **User**
+
+  ```text
+  /prompts:leansdd Help me draft a Constitution for a small CLI that syncs local notes to a remote server. I want brief code best practices and a reasonable spec index for a Python project.
+  ```
+
+- **Assistant (abridged)**
+
+  ```text
+  I’ll draft a concise Constitution with:
+  - A one-paragraph description of the CLI and why it exists.
+  - A short list of Python best practices aligned with your goals.
+  - A project-specific Specification index based on LeanSDD’s FR/NFR/Glossary/Architecture/Subsystem structure.
+
+  Before I write it, a couple of clarifications:
+  1) Do you expect multiple subsystems (e.g., CLI, sync engine, storage), or keep it as one subsystem for now?
+  2) Are there any non-negotiable practices you already apply (type hints, strict linting, etc.)?
+  ```
+
+
+### Author or update FR/NFR/Glossary/Architecture/Subsystem specs
+
+Use this when you want to create or refine individual spec files while staying within LeanSDD boundaries.
+
+**Example (FR authoring)**
+
+- **User**
+
+  ```text
+  /prompts:leansdd Draft a new `docs/fr-note-sync.md` for my notes CLI. It should cover the user starting a sync, handling connectivity errors, and showing a summary of changes. Keep it short and include a few acceptance scenarios with stable IDs.
+  ```
+
+- **Assistant (abridged)**
+
+  ```text
+  I’ll create a concise FR focused on note sync:
+  - 2–3 short context paragraphs from the user’s point of view.
+  - Bullets for main behaviors and error conditions.
+  - A small set of high-signal scenarios with IDs like `#happy-path` and `#network-failure`.
+
+  Clarifications:
+  1) Should sync be automatic on every edit, or explicit on demand?
+  2) Do you require any performance constraints (e.g., max sync time)?
+  ```
+
+
+### Reconcile specs and code
+
+Use this when you have code changes or failures and want to see how they line up with existing specs.
+
+**Example**
+
+- **User**
+
+  ```text
+  /prompts:leansdd I’ve added a retry-on-failure feature to the sync engine. Here’s the diff (staged). Compare it with `docs/fr-note-sync.md` and tell me what parts of the FR are now outdated or incomplete. Suggest updates but don’t rewrite the whole file unless necessary.
+  ```
+
+- **Assistant (abridged)**
+
+  ```text
+  I’ll:
+  - Summarize the current behavior described in `docs/fr-note-sync.md`.
+  - Compare it to the diff to identify mismatches (e.g., new retry behavior not mentioned in the FR, updated error messages).
+  - Propose targeted edits to the FR, keeping it concise and destructive (no patch notes).
+
+  If you paste the current content of `docs/fr-note-sync.md` and the diff, I can point out exactly which bullets and scenarios to update.
+  ```
+
+
+### Critique existing specs for LeanSDD alignment
+
+Use this when you want a LeanSDD-style review rather than new content.
+
+**Example**
+
+- **User**
+
+  ```text
+  /prompts:leansdd Review `docs/fr-login.md` and `docs/nfr.md` for LeanSDD issues. Point out where they’re too verbose, mixing concerns, or leaking data models/UI copy. Suggest concrete, high-level improvements rather than rewriting everything.
+  ```
+
+- **Assistant (abridged)**
+
+  ```text
+  I’ll look for:
+  - Overly long context sections or repetitive bullets.
+  - Architecture or subsystem details leaking into FRs or NFRs.
+  - Data models or UI wording that belong in separate docs.
+  - Incremental “update” sections instead of clean destructive edits.
+
+  I’ll return:
+  - A short list of concrete issues per file.
+  - Specific suggestions on what to trim, move, or split, and which sections would benefit from new or clearer acceptance scenarios.
+  If you’d like, I can then help you apply those suggestions in a follow-up step.
+  ```
+
+
+## Conversation flow and scope
+
+- `/prompts:leansdd` does not create modes or subtasks; you stay in one conversation.
+- You control the scope: it works best when you focus on a small set of files or a specific diff rather than your entire codebase at once.
+- You can call `/prompts:leansdd` multiple times in the same repo as your specs evolve:
+  - First to draft or refine the Constitution.
+  - Later to add or adjust FRs/NFRs/Architecture/Subsystems.
+  - Again to critique your specs or reconcile them with new code changes.
+- At any time, you can paste spec files, code snippets, or `git diff` output; the assistant will adapt to what you provide and ask focused clarifying questions only when needed.
+

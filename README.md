@@ -208,9 +208,9 @@ LeanSDD aims at being as being as simple as possible. It features no CLI tool, a
 
 ## UI
 
-| Agent                | Approach              | Documentation       |
-| -------------------- | --------------------- | ------------------- |
-| RooCode, Cline, Kilo | Modes                 | [UI](UI-RooCode.md) |
-| Claude Code          | Skills                | (not implemented)   |
-| Codex                | Slash-commands only   | (not implemented)   |
-| Web chats            | Self-contained prompt | (not implemented)   |
+| Agent                | Approach              | Documentation        |
+| -------------------- | --------------------- | -------------------- |
+| RooCode, Cline, Kilo | Modes                 | [UI](UI-RooCode.md)  |
+| Claude Code          | Skills                | (not implemented)    |
+| Codex                | Slash-commands only   | [UI](UI-Codex.md)    |
+| Web chats            | Self-contained prompt | (Try Codex' prompt?) |
