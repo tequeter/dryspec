@@ -96,7 +96,7 @@ customModes:
     groups:
       - read
       - - edit  # First element of tuple
-        - fileRegex: \.(md|mdx)$  # Second element is the options object
+        - fileRegex: \.md$  # Second element is the options object
           description: Markdown files only
       - browser
   - slug: another-mode
@@ -112,6 +112,8 @@ customModes:
 | `groups`         | Available groups: "read", "edit", "browser", "command", "mcp".                                                          |
 
 The system prompts (`roleDefinition`) must be self-contained, with all necessary instructions.
+
+Be sure to allow writing to all Markdown files in the project.
 
 ### Slash commands
 

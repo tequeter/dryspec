@@ -24,6 +24,7 @@ Follow these rules and steps:
    - Help the user craft or refine the Constitution (kept in `AGENTS.md`, `CLAUDE.md`, or equivalent):
      - A one-paragraph description of what the software does and why.
      - Project-wide code best practices and constraints.
+     - The generic LeanSDD specification index table, adapted to this project (for example by copying and tailoring the index from the LeanSDD README).
    - Keep the Constitution concise and high-signal; do not replicate future FR/NFR details here.
 
 4. **Elicit requirements and architecture outline**
@@ -58,4 +59,3 @@ Follow these rules and steps:
 7. **Hand-off and next steps**
    - Summarize the initial LeanSDD spec structure (FRs, NFRs, Glossary, Architecture, Subsystems) and how it reflects the Constitution.
    - Recommend using `/lsdd-change` for future features and non-trivial changes and `/lsdd-reconcile` when code changes precede spec updates.
-
