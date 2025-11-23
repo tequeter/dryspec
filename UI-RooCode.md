@@ -1,91 +1,56 @@
 # LeanSDD in RooCode
 
-This guide assumes you have read `README.md` and already configured your Constitution and Specification Index.
+This document explains how to use LeanSDD from RooCode using modes and slash-commands.
 
-## Modes
+## Available modes
 
-- `Spec Author (LeanSDD)` (`lsdd-author`)
-  - Writes and refactors the LeanSDD specification (FRs, NFRs, architecture, glossary).
-  - Focuses on destructive editing: rewrite or trim existing text instead of adding appendices or "notes".
-  - Asks concrete clarifying questions before making non-trivial changes.
-  - Keeps files within the limits defined in the Specification Index.
-- `Spec Critic (LeanSDD)` (`lsdd-critic`)
-  - Reviews the specification for concision, hidden assumptions, and compliance with LeanSDD rules.
-  - Highlights violations of size limits, "SHALL NOT" requirements, and missing clarifying questions.
-  - Suggests targeted edits instead of rewriting everything.
-- Built-in `ask` mode
-  - Used for focused code or repo deep-dives.
-  - Typically runs in a sub-task, then reports back short, high-signal findings to Spec Author or Spec Critic.
+- `LeanSDD` — Agile specification coach that understands the LeanSDD framework. It focuses on FR/NFR/Glossary/Architecture/Subsystem specs under `docs/`, keeps them short and dense, and follows the Git/context rules from the Constitution.
+- `Ask` (built-in) — Large‑context code reader for deep dives into the codebase. The agent uses it from sub‑tasks when it needs to understand existing code or diffs, then bring back concise findings to `LeanSDD`.
 
-## Slash-commands
+## Available slash-commands
 
-- `/lsdd-brownfield`
-  - Guides the Brownfield workflow for an existing codebase.
-  - Helps you discover subsystems, architecture, candidate FRs/NFRs, and glossary entries from the code.
-- `/lsdd-greenfield`
-  - Guides the initial setup for a new project after you have a Constitution.
-  - Helps you sketch the first FRs, NFRs, architecture, and glossary at LeanSDD granularity.
-- `/lsdd-change`
-  - Guides the Specification-Driven Change workflow.
-  - Helps you update FRs/NFRs, architecture, and subsystems before coding.
-- `/lsdd-code-change`
-  - Guides the Code-Driven Change workflow starting from staged code changes.
-  - Helps you find inconsistencies between the code and the existing specification.
+- `/lsdd-init-existing` — Brownfield initialization. Guides you through bootstrapping LeanSDD specs for an existing codebase: checking Git state, identifying subsystems, harvesting observations with `ask` in sub‑tasks, and drafting initial Architecture/FR/NFR/Glossary specs.
+- `/lsdd-init-new` — Greenfield initialization. Helps you refine the Constitution for a new project and create the initial FR/NFR/Glossary/Architecture/Subsystem spec skeletons ready for the Specification‑Driven Change workflow.
+- `/lsdd-change` — Specification‑Driven Change. Starting from a desired change, it drives the FR/NFR/Glossary updates, then Architecture/Subsystems updates, stages the spec changes, and runs a critique pass before handing off to a Coder agent.
+- `/lsdd-reconcile` — Code‑Driven Change. Starting from staged code changes, it uses `ask` to understand the diff, compares it to the existing specs, and guides you in reconciling specs and code.
+
+Each command:
+
+- Uses `switch_mode` to select the appropriate mode (`LeanSDD` for specs, `ask` for deep dives).
+- Uses `new_task` when it needs a fresh, focused context (shown in the UI as "in a sub‑task").
+- Encourages minimal, step‑scoped contexts and Git‑based protection (staging and explicit user approval for Git operations).
 
 ## Sample sessions
 
-### Brownfield
+### Brownfield: `/lsdd-init-existing`
 
-1. Start in `Spec Author (LeanSDD)`.
-2. User: `/lsdd-brownfield`
-3. Spec Author:
-   - Confirms that the Constitution is ready.
-   - Proposes a list of subsystems and a short exploration plan.
-4. User: "Open an `ask` sub-task on the backend service and summarize its behavior."
-5. Spec Author (in a sub-task, ask mode):
-   - Deep-dives into the selected folders.
-   - Returns a short summary plus candidate FRs/NFRs and glossary terms.
-6. Spec Author (main task):
-   - Uses the findings to initialize or refactor `docs/architecture.md`, `docs/fr-*.md`, `docs/nfr.md`, and `docs/glossary.md`, staying within the Specification Index limits.
-7. User: "Switch to Spec Critic (LeanSDD) in a sub-task and review the new spec."
+- User (main chat): `/lsdd-init-existing`
+- LeanSDD: Checks `git status`, asks which parts of the repo to focus on, and proposes a list of subsystems based on top‑level directories.
+- LeanSDD (in a sub‑task, `ask` mode): Deep‑dives into one subsystem directory, summarizing responsibilities, external behaviors, and potential FR/NFR/Glossary/Architecture notes in a short, dense bullet list.
+- LeanSDD (main chat): Uses the returned notes to propose concise updates to `docs/architecture.md`, `docs/sub-*.md`, and initial `docs/fr-*.md`/`docs/nfr.md`/`docs/glossary.md`, then suggests staging the spec files.
+- LeanSDD (in a sub‑task, `LeanSDD` mode): Runs a critique pass on the staged spec changes, checking concision, file size limits, and mis‑placed details, and reports issues to fix.
 
-### Greenfield
+### Greenfield: `/lsdd-init-new`
 
-1. Start in `Spec Author (LeanSDD)`.
-2. User: `/lsdd-greenfield`
-3. Spec Author:
-   - Asks clarifying questions about the product, constraints, and risks.
-   - Ensures the Constitution is complete and consistent.
-   - Proposes an initial list of FR documents, NFR areas, and major subsystems.
-4. Spec Author (in a sub-task):
-   - Drafts concise initial versions of `docs/fr-*.md`, `docs/nfr.md`, `docs/architecture.md`, and `docs/glossary.md`, obeying the Specification Index.
-5. User: "Switch to Spec Critic (LeanSDD) in a sub-task and critique the initial specification."
+- User (main chat): `/lsdd-init-new`
+- LeanSDD: Confirms that this is a new project, checks for the presence of a Constitution in `AGENTS.md`/`CLAUDE.md` (or equivalent), and asks clarifying questions about the product and constraints.
+- LeanSDD (main chat): Helps refine the Constitution text (one‑paragraph description plus code best practices), then proposes a minimal set of initial FRs (major user journeys or public APIs), NFR areas, and likely subsystems.
+- LeanSDD (in a sub‑task, `LeanSDD` mode): Creates short, skeletal `docs/fr-*.md`, `docs/nfr.md`, `docs/glossary.md`, and `docs/architecture.md`/`docs/sub-*.md` entries that respect LeanSDD limits and leave detailed design to the future Specification‑Driven Change workflow.
+- LeanSDD (main chat): Summarizes what was written, suggests staging the new spec files, and reminds you to use `/lsdd-change` for the first real feature change.
 
-### Specification-Driven Change
+### Specification‑Driven Change: `/lsdd-change`
 
-1. Start in `Spec Author (LeanSDD)`.
-2. User: `/lsdd-change`
-3. Spec Author:
-   - Asks clarifying questions about the intended change and its impact.
-   - Identifies which FRs/NFRs, subsystems, and architecture sections are affected.
-4. Spec Author (in a sub-task):
-   - Updates the relevant FRs and NFRs first, using destructive editing and keeping them within limits.
-5. Spec Author (in another sub-task):
-   - Updates `docs/architecture.md` and any affected subsystem specs, using `git diff` as context when useful.
-6. User: stage the specification changes in Git.
-7. User: "Switch to Spec Critic (LeanSDD) in a sub-task and run a focused review of the staged spec changes."
+- User (main chat): `/lsdd-change` and describes the desired change.
+- LeanSDD: Checks for a clean Git state, then asks targeted clarifying questions about the change and which parts of the system it affects.
+- LeanSDD (in a sub‑task, `LeanSDD` mode): Updates the relevant FRs and, if needed, NFRs and Glossary entries, keeping each spec file small, cohesive, and free of UI copy or data‑model details.
+- LeanSDD (in another sub‑task, `LeanSDD` mode): Updates Architecture and Subsystem specs to reflect the same change, using `git diff` on the spec files from the previous step as context.
+- LeanSDD (main chat): Proposes staging the updated spec files, spawns a critique sub‑task to review them for violations of LeanSDD rules, then summarizes the final spec delta and tells you to hand off to a Coder agent with the staged specs.
 
-### Code-Driven Change
+### Code‑Driven Change: `/lsdd-reconcile`
 
-1. Implement and stage your code changes.
-2. Start in `Spec Author (LeanSDD)` or `Spec Critic (LeanSDD)`.
-3. User: `/lsdd-code-change`
-4. The agent:
-   - Looks at the staged diff and the existing specification.
-   - Identifies where the code and spec disagree or where the spec is silent.
-   - Asks clarifying questions instead of guessing intent.
-5. The agent proposes options:
-   - Adjust the code to match the spec.
-   - Or adjust the spec (via `/lsdd-change` in Spec Author, typically in a sub-task).
-6. After the spec is updated and staged, run `lsdd-critic` again in a sub-task to check for hidden assumptions or missed constraints.
+- User (main chat): Stages only the code changes, then runs `/lsdd-reconcile`.
+- LeanSDD: Verifies that only code (no spec files) is staged and asks which feature or bug the changes are meant to address.
+- LeanSDD (in a sub‑task, `ask` mode): Uses a large context to inspect the staged diff and nearby code, summarizing behavior changes and potential impacts on existing FR/NFR/Architecture/Subsystem specs.
+- LeanSDD (in a sub‑task, `LeanSDD` mode): Proposes minimal, destructive edits to the affected spec files so that they match the staged code behavior, keeping them concise and within their roles.
+- LeanSDD (main chat): Suggests staging the spec changes separately, runs a quick critique sub‑task to spot inconsistencies or bloated specs, and summarizes options (adjust code, adjust specs, or split into multiple changes).
 

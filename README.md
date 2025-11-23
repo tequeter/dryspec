@@ -151,6 +151,7 @@ For an existing project, from the perspective of the user,
 
 - Complete your Constitution.
 - Load LeanSDD and let the agent explore the codebase.
+  - The agent SHOULD suggest a list of subsystem by listing 1-2 levels of directories, appropriate to the current language and project (such as: list `src`).
   - You SHOULD use a dedicated context (sub-agent, sub-task) to deep-dive into each Subsystem.
   - The sub-agent SHALL document the Subsystem, asking clarifying questions as necessary.
   - The sub-agent SHALL return Architecture, FRs, NFRs, and Glossary concise observations to the calling agent.
