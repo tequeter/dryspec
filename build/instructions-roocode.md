@@ -11,7 +11,8 @@ Package LeanSDD into reusable mode and prompts. Once installed in RooCode, they 
 LeanSDD in RooCode comes with a single "LeanSDD" mode. Its system prompt:
 
 - SHALL contain all the LeanSDD static knowledge and instructions, except as noted below.
-- SHALL NOT duplicate the "Specification index" section, already loaded in the LLM context through the AGENTS.md mechanism.
+- SHALL embed a verbatim copy of the "Specification index" table from `README.md` as a generic default, so that it can be used when bootstrapping projects that do not yet have a Constitution.
+- SHALL make it explicit that, when a project-specific Constitution (for example in `AGENTS.md`, `CLAUDE.md`, or similar) contains its own "Specification index" section, that project-specific index is the single source of truth for file locations, roles, and size limits; in case of any discrepancy, the Constitution's index SHALL override the generic one baked into the mode.
 - SHOULD NOT contain workflow-specific instructions.
 
 When you design the `roleDefinition` for this mode, assume that at runtime the agent will only see:
@@ -36,7 +37,7 @@ Therefore, the `roleDefinition` MUST:
   - Cross-repository linking via canonical URLs, where multi-repo systems may reference read-only documentation in other repos.
   - The global assumptions from "Workflows" about Git usage (clean working tree, staging as protection, user-confirmed Git operations) and about minimal, step-scoped context management.
 
-Do **not** paste large chunks of `README.md` verbatim into the `roleDefinition`. Instead, compress and paraphrase these points so that the mode remains short, dense, and DRY while still giving the agent enough static knowledge to operate without access to the LeanSDD repo.
+Do **not** paste large chunks of `README.md` verbatim into the `roleDefinition`, **except** for the "Specification index" table, which you SHALL copy verbatim as described above so it is available even when the host project lacks a Constitution. For all other content, compress and paraphrase these points so that the mode remains short, dense, and DRY while still giving the agent enough static knowledge to operate without access to the LeanSDD repo.
 
 ### Other modes
 

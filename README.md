@@ -28,7 +28,7 @@ The Constitution is always loaded into the context, for all agents, so it is par
 
 1. A short description of the program in one paragraph. What the software does (features), why, what problem it solves.
 2. Code best practices.
-3. A generic specification index provided below.
+3. A specification index for this project. Start with the generic template provided below, and tune the limits if needed (some paths are embedded in system prompts).
 
 The user provides the Constitution (the description is quick to write, and the best practices are supposedly already identified before the project).
 
