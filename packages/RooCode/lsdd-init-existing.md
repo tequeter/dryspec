@@ -12,6 +12,8 @@ High-level goals:
 
 Follow these rules and steps:
 
+0. Before you start, use the `update_todo_list` tool to record the main steps of this workflow as a shared checklist, and update it as you progress (adding, reordering, or ticking off items).
+
 1. **Select modes and context**
    - Use `switch_mode` to ensure you are in the `LeanSDD` mode for specification work.
    - Use `switch_mode` to move into the built-in `ask` mode when you need to read and summarize sizable chunks of code or diffs (large-context code exploration).

@@ -60,6 +60,7 @@ Each slash-command prompt SHALL:
   - Use staging (`git add`) as the primary mechanism to protect specification changes, and remind the user that Git operations SHOULD be explicitly confirmed.
   - Encourage minimal, step-scoped contexts and the use of fresh sub-tasks rather than accumulating too much unrelated context.
 - Stay DRY with respect to the mode’s `roleDefinition`: reference the relevant LeanSDD sections (e.g. Brownfield/Greenfield/Specification-Driven Change/Code-Driven Change) and their intent, but do not restate them in full; instead, summarize what the agent needs to do in that workflow and rely on the mode’s `roleDefinition` for shared rules.
+- Make use of the `update_todo_list` tool to keep track of the tasks ahead.
 
 ### Clean context
 

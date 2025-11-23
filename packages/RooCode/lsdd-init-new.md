@@ -12,6 +12,8 @@ High-level goals:
 
 Follow these rules and steps:
 
+0. Before you start, use the `update_todo_list` tool to record the main steps of this workflow as a shared checklist, and update it as you progress (adding, reordering, or ticking off items).
+
 1. **Select modes and context**
    - Use `switch_mode` to ensure you are in the `LeanSDD` mode for specification work.
    - Use `new_task` when you need a focused context to draft or critique a subset of spec files; describe the task and include all necessary information in the sub-task instructions.

@@ -12,6 +12,8 @@ High-level goals:
 
 Follow these rules and steps:
 
+0. At the beginning of the workflow, use the `update_todo_list` tool to capture the intended steps (from the list below) as a checklist, and keep it updated as you make progress or adjust the plan.
+
 1. **Select modes and context**
    - Use `switch_mode` to ensure you are in the `LeanSDD` mode for spec work.
    - Use `new_task` to create focused sub-tasks whenever you need a fresh context for:

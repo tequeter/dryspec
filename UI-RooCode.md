@@ -16,6 +16,7 @@ This document explains how to use LeanSDD from RooCode using modes and slash-com
 
 Each command:
 
+- Keeps a lightweight TODO list of the main workflow steps using RooCode's `update_todo_list` tool, updating it as the agent makes progress or the plan changes.
 - Automatically switches between the LeanSDD mode (for specs) and the built‑in Ask mode (for code deep dives).
 - Uses short‑lived sub‑tasks (shown in the UI as "in a sub‑task") whenever it needs a fresh, focused context.
 - Encourages minimal, step‑scoped contexts and Git‑based protection (staging and explicit user approval for Git operations).
