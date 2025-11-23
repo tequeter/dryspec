@@ -22,6 +22,7 @@ Follow these rules and steps:
 2. **Check Git and clarify the scope**
    - Run an appropriate Git command (for example, `git status --porcelain`) to check whether the working tree is clean.
    - If there are uncommitted or unstaged changes, clearly summarize them and ask the user how to proceed; do not assume you may overwrite them.
+   - Check whether a Constitution file (for example in `AGENTS.md`, `CLAUDE.md`, or an equivalent always-loaded file) is present; if it is missing or clearly incomplete, pause the workflow and ask the user to create or refine it before continuing.
    - Ask a short, focused list of clarifying questions about the application/library, main technologies, and what parts of the repo are most important to cover first.
 
 3. **Propose subsystems and plan the exploration**
@@ -61,4 +62,3 @@ Follow these rules and steps:
    - Explicitly suggest next steps, typically:
      - Use `/lsdd-change` for Specification-Driven Changes.
      - Use `/lsdd-reconcile` for reconciling future code changes with these specs.
-

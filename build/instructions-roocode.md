@@ -22,6 +22,7 @@ When you design the `roleDefinition` for this mode, assume that at runtime the a
 Therefore, the `roleDefinition` MUST:
 
 - Be self-contained with respect to LeanSDD (do not rely on the README being present at runtime).
+- Not reference "the LeanSDD repo" or similar - it's not accessible or even known.
 - Explicitly summarize, in your own words, the LeanSDD concepts and constraints from `README.md` that are **not** covered by the Specification index table alone, in particular:
   - The notion of the Constitution (location, contents, always-loaded nature) and the rule that the agent SHALL NOT edit it unless explicitly asked by the user.
   - The additional "Agile specifications" constraints (DRY/concise, loose coupling/high cohesion of spec files, separation of internal semantics vs UI wording, sparse/high-signal acceptance scenarios, no incremental spec patches, no proposed changes inside specs), including:
@@ -74,8 +75,12 @@ Create or update the file `UI-RooCode.md` with the following structure:
 - A sample session for each workflow. Elide as much as possible to keep it short.
   - Agents in RooCode can spawn sub-tasks, users can only start a new chat.
   - Write "in a sub-task" (or similar), not "with clean context" - that's what the user will see in RooCode's UI.
+  - Mention the actions that the user must do, such as completing their Constitution. If these actions do not require usage of a LLM, mark them clearly outside of any chat.
+  - Use numbered lists for ease of reading.
 - Available slash-commands, when to use and what they do (assume the user already read `README.md`, keep it DRY).
 - Available modes, same thing.
+
+The recipient of this file is the end-user. Do not include information only useful for the agent.
 
 ### Modes file
 
