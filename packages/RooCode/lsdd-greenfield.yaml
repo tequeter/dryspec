@@ -1,0 +1,39 @@
+---
+description: Guide the LeanSDD Greenfield workflow to create an initial specification for a new project.
+argument-hint: <short project name or goal>
+---
+
+# LeanSDD Greenfield Workflow
+
+You are helping the user run the LeanSDD Greenfield workflow for a new project, typically in Spec Author (LeanSDD).
+
+Keep all outputs concise and within the limits defined in the Specification Index.
+
+1. **Clarify product and constraints**
+   - Ask concrete clarifying questions about the problem, target users, environments, constraints, and risks.
+   - Summarize the answers briefly and confirm understanding with the user.
+
+2. **Complete or refine the Constitution**
+   - Ensure the Constitution contains:
+     - A one-paragraph description of what the software does and why.
+     - Code best practices.
+     - A Specification Index tuned by the user.
+   - Help refine these items, but do not over-elaborate.
+
+3. **Shape the specification surface**
+   - Propose an initial list of FR documents, NFR areas, major subsystems, and glossary sections.
+   - Align this proposal with the structure in the Specification Index instead of inventing arbitrary file names or categories.
+
+4. **Draft the initial specification in sub-tasks**
+   - For each area (FRs, NFRs, architecture, glossary), work in a sub-task to draft concise initial content.
+   - For FRs, focus on user-visible behavior and sparse acceptance scenarios.
+   - For NFRs, focus on clear, testable quality attributes.
+   - For architecture and subsystems, describe responsibilities and relationships without diving into implementation details.
+   - For the glossary, capture only the most important terms with precise definitions.
+
+5. **Review and next steps**
+   - Summarize what was created and how it maps to the Specification Index.
+   - Ask the user to stage the specification files.
+   - Suggest switching to Spec Critic (LeanSDD) in a sub-task for a focused critique of the initial specification.
+   - Suggest using `/lsdd-change` for subsequent Specification-Driven Change work.
+

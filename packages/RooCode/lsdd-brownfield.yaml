@@ -1,0 +1,39 @@
+---
+description: Guide the LeanSDD Brownfield workflow to bootstrap specifications from an existing codebase.
+argument-hint: <directory or package to explore, defaults to repo root>
+---
+
+# LeanSDD Brownfield Workflow
+
+You are helping the user run the LeanSDD Brownfield workflow on an existing repository, typically in Spec Author (LeanSDD) with support from ask-mode sub-tasks.
+
+Follow this process and keep all outputs concise and within the budgets defined in the Specification Index.
+
+1. **Confirm the Constitution**
+   - Ask whether a Constitution already exists and where it is stored.
+   - If it is missing or incomplete, help the user draft or refine it first, keeping it short and high-signal.
+
+2. **Map the system**
+   - Ask clarifying questions about the product, major responsibilities, and boundaries of the system.
+   - Propose a first-cut list of subsystems and a short exploration plan, scoped to a few folders or services at a time.
+
+3. **Explore subsystems in ask sub-tasks**
+   - For each subsystem, create an `ask` sub-task focused on a small set of directories or services.
+   - In each sub-task, read only what is necessary, then return to the main task with:
+     - A short summary of the subsystem's purpose.
+     - Candidate FRs and NFRs (names and one-line notes only, not full specs).
+     - Candidate glossary terms and architectural observations.
+
+4. **Build the initial specification**
+   - Back in Spec Author (LeanSDD), use the findings to:
+     - Draft or refine `docs/architecture.md`.
+     - Initialize `docs/fr-*.md` files with terse outlines and acceptance scenarios.
+     - Capture NFR areas in `docs/nfr.md`.
+     - Add or refine terms in `docs/glossary.md`.
+   - Keep every file within the limits defined in the Specification Index.
+   - Use destructive editing: refactor or replace existing text instead of adding "notes" or incremental appendices.
+
+5. **Hand off for review**
+   - Ask the user to stage the specification changes in Git.
+   - Suggest switching to Spec Critic (LeanSDD) in a sub-task to critique the new specification before any further work.
+

@@ -145,7 +145,7 @@ About context management:
 
 "Loading LeanSDD" (into the LLM context) may mean changing mode, entering a slash-command etc., [depending on your AI runtime](#ui).
 
-### Brownfield (`/lsdd-brownfield`)
+### Brownfield
 
 For an existing project, from the perspective of the user,
 
@@ -164,14 +164,14 @@ For an existing project, from the perspective of the user,
 - Stage your changes.
 - Clear and load LeanSDD again, then ask the agent to critique your specification, looking for inconsistencies. Fix as needed.
 
-### Greenfield (`/lsdd-greenfield`)
+### Greenfield
 
 Creating a new project (greenfield deployment) just means filling in the Constitution as described above.
 
 Then use the Specification-Driven Change workflow below to create the rest of the specification.
 
 
-### Specification-Driven Change (`/lsdd-change`)
+### Specification-Driven Change
 
 This is the main workflow, and the user SHOULD use it for all non-trivial changes.
 
@@ -188,14 +188,14 @@ From the perspective of the user:
 - Implement the change with a Coder agent, pointing it at the staged specification changes.
 
 
-### Code-Driven Change (`/lsdd-code-change`)
+### Code-Driven Change
 
 This workflow is useful when either the user skipped the specification part, or for a bugfix that didn't seem to warrant touching the specifications.
 
 Either way,
 
 - Start with your code changes (and nothing else) staged in Git.
-- Ask LeanSDD Spec Critic to look for inconsistencies between your staged code changes and the existing specifications.
+- Ask LeanSDD to look for inconsistencies between your staged code changes and the existing specifications.
 - Fix as you see fit, possibly using a new context depending on the situation. If using an agent, it SHALL ask the user when faced with conflicts.
 
 
@@ -206,16 +206,9 @@ LeanSDD aims at being as being as simple as possible. It features no CLI tool, a
 
 ## UI
 
-When the dev agent allows it, LeanSDD comes with two personae (modes, skills etc.):
-
-- "Spec Author (LeanSDD)" (slug: `lsdd-author`)
-- "Spec Critic (LeanSDD)" (slug: `lsdd-critic`)
-
-And the above slash-commands guiding each workflow.
-
-| Agent                | Approach              | Documentation     |
-| -------------------- | --------------------- | ----------------- |
-| RooCode, Cline, Kilo | Modes                 | [UI](UI-modes.md) |
-| Claude Code          | Skills                | (not implemented) |
-| Codex                | Slash-commands only   | (not implemented) |
-| Web chats            | Self-contained prompt | (not implemented) |
+| Agent                | Approach              | Documentation       |
+| -------------------- | --------------------- | ------------------- |
+| RooCode, Cline, Kilo | Modes                 | [UI](UI-RooCode.md) |
+| Claude Code          | Skills                | (not implemented)   |
+| Codex                | Slash-commands only   | (not implemented)   |
+| Web chats            | Self-contained prompt | (not implemented)   |

@@ -1,0 +1,37 @@
+---
+description: Guide the LeanSDD Specification-Driven Change workflow, updating the specification before coding.
+argument-hint: <short label or ticket id for the change>
+---
+
+# LeanSDD Specification-Driven Change
+
+You are helping the user run the LeanSDD Specification-Driven Change workflow, typically in Spec Author (LeanSDD).
+
+Always start from the specification, not the code, and keep all outputs within the limits defined in the Specification Index.
+
+1. **Understand the change**
+   - Ask clarifying questions about the motivation, scope, and constraints of the change.
+   - Identify whether it affects FRs, NFRs, architecture, subsystems, glossary, or a combination.
+
+2. **Identify affected specification files**
+   - Propose a list of specific documents that should change (for example, `docs/fr-checkout.md`, `docs/nfr.md`, `docs/architecture.md`).
+   - Confirm the list with the user before editing.
+
+3. **Update FRs and NFRs first (in a sub-task)**
+   - In a sub-task, update the relevant FRs and NFRs using destructive editing:
+     - Replace or refactor existing text instead of adding "notes" sections.
+     - Keep each file within its budget as defined in the Specification Index.
+     - Maintain a clear separation between FRs (user-visible behavior) and NFRs (quality attributes).
+
+4. **Update architecture and subsystem docs (in another sub-task)**
+   - Update `docs/architecture.md` and any subsystem documents to reflect the new behavior.
+   - Use `git diff` on the specification files, when helpful, to anchor your reasoning and avoid missing changes.
+
+5. **Stage and critique the specification**
+   - Ask the user to stage the updated specification files in Git.
+   - Suggest switching to Spec Critic (LeanSDD) in a sub-task to review the staged spec changes for concision, hidden assumptions, and consistency.
+
+6. **Hand off to coding**
+   - Once the spec passes the critique, summarize the intended behavior and constraints.
+   - Remind the user to have a coding agent implement the change with the staged specification as its primary context.
+
