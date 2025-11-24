@@ -8,49 +8,34 @@ Package LeanSDD into a single reusable Codex CLI prompt. Once installed in Codex
 
 ### LeanSDD prompt `/prompts:leansdd`
 
-LeanSDD in Codex CLI is exposed only as the `/prompts:leansdd` slash-command. Its prompt body:
+LeanSDD in Codex CLI is exposed only as the `/prompts:leansdd` slash-command.
+Its prompt body:
 
-- SHALL contain all the LeanSDD static knowledge and instructions needed to help the user work with Constitutions and specifications, except as noted below.
-- SHALL embed a verbatim copy of the "Specification index" table from `README.md` as a generic default, so that it can be used when bootstrapping projects that do not yet have a Constitution.
-- SHALL make it explicit that, when a project-specific Constitution (for example in `AGENTS.md`, `CLAUDE.md`, or similar) contains its own "Specification index" section, that project-specific index is the single source of truth for file locations, roles, and size limits; in case of any discrepancy, the Constitution's index SHALL override the generic one baked into the prompt.
-- SHALL NOT define or assume any explicit "modes", "subtasks", or multi-command workflows. Codex CLI does not support those features; all behavior MUST be driven by the user’s instructions within a single ongoing conversation.
+- SHALL implement the shared LeanSDD knowledge, Specification index rules, and
+  prompt-design constraints defined in `build/instructions.md`.
+- SHALL NOT define or assume any explicit "modes", "subtasks", or multi-command
+  workflows. Codex CLI does not support those features; all behavior MUST be
+  driven by the user’s instructions within a single ongoing conversation.
 
-When you design the `/prompts:leansdd` prompt body, assume that at runtime the agent will only see:
-
-- The Constitution from the host repo (via `AGENTS.md` / `CLAUDE.md`, etc.), which SHOULD already embed the generic "Specification index".
-- The current project’s specs and code (but not this LeanSDD repo).
-- The user’s current message, which MAY ask for help with tasks such as drafting or refining a Constitution, authoring or updating specifications, critiquing specs, or reconciling specs and code.
+When you design the `/prompts:leansdd` prompt body, assume the runtime context
+described in `build/instructions.md` ("Runtime context") and that the user’s
+current message MAY ask for help with tasks such as drafting or refining a
+Constitution, authoring or updating specifications, critiquing specs, or
+reconciling specs and code.
 
 Therefore, the `/prompts:leansdd` prompt body MUST:
 
-- Be self-contained with respect to LeanSDD (do not rely on the README being present at runtime).
-- Not reference "the LeanSDD repo" or similar - it is not accessible or even known.
-- Treat the user’s request as the driver for the interaction. The prompt SHALL instruct the agent to:
-  - Ask a short, focused list of clarifying questions when the goal, constraints, or target specs are ambiguous instead of assuming missing context on its own.
-  - Interpret the user’s description of the task (for example, drafting specs, critiquing them, or reconciling specs and code) and apply the relevant LeanSDD knowledge accordingly, without inventing additional tasks or hidden workflows.
-  - Adapt its behavior to the user’s stated task while remaining within the same conversation and without spawning "subtasks" or switching "modes".
-- Explicitly summarize, in your own words, the LeanSDD concepts and constraints from `README.md` that are **not** covered by the Specification index table alone, in particular:
-  - The notion of the Constitution (location, contents, always-loaded nature) and the rule that the agent SHALL NOT edit it unless explicitly asked by the user.
-  - The additional "Agile specifications" constraints (DRY/concise, loose coupling/high cohesion of spec files, separation of internal semantics vs UI wording, sparse/high-signal acceptance scenarios, no incremental spec patches, no proposed changes inside specs), including:
-    - That detailed internal interfaces and tests beyond acceptance are out of scope for the specs.
-    - That minor design decisions are explicitly left to the coder agent and its human operator.
-    - That LeanSDD is optimized for incremental, agile change rather than a waterfall process (you MAY briefly allude to this contrast without reproducing the FAQ).
-  - The per-file roles and semantics for FR, NFR, Glossary, Architecture, and Subsystem specs, including what belongs in each, what is out of scope, and the key naming/identifier rules for FRs. In particular, encode that:
-    - For FRs: application FRs focus on major user-visible requirements, library FRs focus on the public interface; acceptance scenarios MAY use a Gherkin-like structure; each scenario SHOULD have a stable identifier suitable for linking from executable tests (for example, `fr-login.md#happy-path`); and FRs MAY record priority using the MoSCoW method.
-    - For Architecture and Subsystems: if there is no global `docs/architecture.md`, the relevant architectural and technical choices MUST be captured in subsystem specs; subsystem specs MAY describe local architecture/technical choices and SHOULD name the major classes and functions in their internal interface between subsystems, but SHALL NOT go down to method signatures or function arguments, and SHALL NOT contain code or pseudo-code.
-  - The boundaries described in "Other files" (data models, external contracts, UI wording) and the fact that the agent SHALL NOT create or update such files unless explicitly instructed, and SHALL avoid stuffing these details into FR/NFR/Architecture/Subsystem specs.
-  - Cross-repository linking via canonical URLs, where multi-repo systems may reference read-only documentation in other repos.
-  - The global assumptions from the README about Git usage (clean working tree, staging as protection, user-confirmed Git operations) and about minimal, step-scoped context management.
-- Encode enough knowledge for the agent to assist with the main LeanSDD tasks without prescribing multi-step workflows, including:
-  - Establishing, reviewing, and refining a project Constitution while respecting its always-loaded, "do not edit unless asked" nature.
-  - Designing initial FR/NFR/Glossary/Architecture/Subsystem specs for a new or sparsely specified project, keeping skeleton contents small, cohesive, and within LeanSDD size limits.
-  - Deriving or refining specifications from an existing codebase by recognizing subsystems and responsibilities from directory and module structure, public interfaces, and observable behaviors.
-  - Keeping specs and code aligned by explaining how to compare current code behavior with existing specs and by highlighting where specs may need adjustment, without assuming that specs or code are always the source of truth.
-  - Critiquing specs against LeanSDD rules (file roles, verbosity, boundaries, hidden assumptions, incremental patches) and suggesting concrete, DRY improvements.
-  - Applying the "Challenges" from `build/instructions.md` by stressing conciseness, size limits, and clarifying questions within its own guidance instead of relying on a separate critique workflow.
-- NOT mention modes or subtasks at all in the prompt body. Codex CLI has no concept of it, so it's uselessly confusing.
-
-Do **not** paste large chunks of `README.md` verbatim into the `/prompts:leansdd` prompt body, **except** for the "Specification index" table, which you SHALL copy verbatim as described above so it is available even when the host project lacks a Constitution. For all other content, compress and paraphrase these points so that the prompt remains short, dense, and DRY while still giving the agent enough static knowledge to operate without access to the LeanSDD repo.
+- Treat the user’s request as the driver for the interaction. The prompt SHALL
+  instruct the agent to:
+  - Ask a short, focused list of clarifying questions when the goal,
+    constraints, or target specs are ambiguous instead of assuming missing
+    context on its own.
+  - Interpret the user’s description of the task (for example, drafting specs,
+    critiquing them, or reconciling specs and code) and apply the relevant
+    LeanSDD knowledge accordingly, without inventing additional tasks or
+    hidden workflows.
+  - Adapt its behavior to the user’s stated task while remaining within the
+    same conversation and without spawning "subtasks" or switching "modes".
 
 ### Capabilities covered by `/prompts:leansdd`
 
@@ -106,10 +91,6 @@ description: LeanSDD specification coach and reviewer
 You are an expert LeanSDD assistant…
 ```
 
-| Field         | Documentation                                                                                                           |
-| ------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `description` | A short, user-friendly summary of the command's purpose. Keep this concise and focused on what `/prompts:leansdd` does. |
-
 The user MAY provide additional instructions after the slash-command (for example, `/prompts:leansdd` followed by a brief task description). These additional instructions will be appended to the command's prompt body; design the prompt so that it treats the appended text as the primary task description and adapts accordingly.
 
 The body of `packages/Codex/lsdd.md` SHALL implement the requirements described in the sections above.
@@ -132,13 +113,14 @@ The recipient of `UI-Codex.md` is the end-user of Codex CLI. Do not include info
 
 ## Your Task
 
-As an expert Prompt Engineer:
+Follow the common instructions in `build/instructions.md` and the Codex CLI
+constraints above, then:
 
-- Review very carefully `<README.md>`, `<build/instructions.md>`, and this file.
-  - Special instructions for Codex when using `shell_command` to read files:
-    - Read `<README.md>` in two tool calls of 150 lines each as it exceeds 10 kB.
-- Do not explore files other than those explicitly listed; they are not relevant for this task.
-- This repo does not have an `AGENTS.md` or similar; do not try to find one.
-- Consider what instructions might be needed to overcome the listed "Challenges" in `build/instructions.md`, especially around ignored authoring rules and clarifying questions.
-- Design the `/prompts:leansdd` prompt body so that it supports all LeanSDD tasks (Constitution work, Greenfield/Brownfield-like specification authoring, specification changes, code/spec reconciliation, and critique), while remaining a single, reusable prompt with no explicit modes or subtask constructs and no built-in workflows.
+- Review `README.md` and this file for Codex-specific details not already
+  covered in `build/instructions.md`.
+- Design the `/prompts:leansdd` prompt body so that it supports all LeanSDD
+  tasks (Constitution work, Greenfield/Brownfield-like specification
+  authoring, specification changes, code/spec reconciliation, and critique),
+  while remaining a single, reusable prompt with no explicit modes or subtask
+  constructs and no built-in workflows.
 - Output the requested files `packages/Codex/lsdd.md` and `UI-Codex.md`.
