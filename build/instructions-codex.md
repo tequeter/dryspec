@@ -16,12 +16,24 @@ Its prompt body:
 - SHALL NOT define or assume any explicit "modes", "subtasks", or multi-command
   workflows. Codex CLI does not support those features; all behavior MUST be
   driven by the user’s instructions within a single ongoing conversation.
+- SHALL treat the slash-command invocation itself as a "load LeanSDD" action
+  only: when `/prompts:leansdd` is first invoked, the agent MUST NOT start
+  exploring specifications or code until the user sends a follow-up message
+  describing a concrete task.
 
 When you design the `/prompts:leansdd` prompt body, assume the runtime context
-described in `build/instructions.md` ("Runtime context") and that the user’s
-current message MAY ask for help with tasks such as drafting or refining a
-Constitution, authoring or updating specifications, critiquing specs, or
-reconciling specs and code.
+described in `build/instructions.md` ("Runtime context") and the Codex-specific
+interaction pattern described below.
+
+#### Interaction pattern in Codex CLI
+
+- The user first runs `/prompts:leansdd` to load the LeanSDD-aware assistant.
+- The agent’s initial response SHOULD be a short confirmation of its role and
+  capabilities and MAY invite the user to describe what they want to work on,
+  but it MUST NOT proactively inspect or summarize any specifications or code.
+- The user then sends one or more follow-up messages describing the concrete
+  task (for example, drafting or refining a Constitution, authoring or updating
+  specifications, critiquing specs, or reconciling specs and code).
 
 Therefore, the `/prompts:leansdd` prompt body MUST:
 
@@ -88,7 +100,8 @@ description: LeanSDD specification coach and reviewer
 You are an expert LeanSDD assistant…
 ```
 
-The user MAY provide additional instructions after the slash-command (for example, `/prompts:leansdd` followed by a brief task description). These additional instructions will be appended to the command's prompt body; design the prompt so that it treats the appended text as the primary task description and adapts accordingly.
+Design the prompt so that `/prompts:leansdd` follows the interaction pattern
+defined in the "Interaction pattern in Codex CLI" section above.
 
 The body of `packages/Codex/leansdd.md` SHALL implement the requirements described in the sections above.
 

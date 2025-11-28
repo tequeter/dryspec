@@ -46,9 +46,9 @@ You can invoke it from any repository where you want to apply LeanSDD-style spec
 
 ## How to use `/prompts:leansdd`
 
-Call `/prompts:leansdd` followed by a short description of what you want. The text after the command is treated as the main task description; the assistant will ask a few clarifying questions only when needed and then respond concisely.
+Start by running `/prompts:leansdd` in Codex CLI to load the LeanSDD-aware assistant for your current repository. Its first reply is a short confirmation of its role and capabilities and an invitation to describe what you want to work on; it does not proactively scan or summarize your specs or code until you ask.
 
-You stay in the same conversation the whole time: `/prompts:leansdd` does not create modes or subtasks. You can paste files, diffs, or summaries as needed, and ask follow-up questions or new tasks in the same chat.
+After that initial handshake, just send normal messages describing your task (for example, “Help me draft a Constitution for…” or “Review these FRs for LeanSDD issues”). `/prompts:leansdd` does not create modes or subtasks; everything happens in a single conversation where you can paste files, diffs, or summaries as needed and steer the work with follow-up questions.
 
 Below are common task types and example interactions.
 
@@ -62,7 +62,21 @@ Use this when bootstrapping LeanSDD for a project or tightening an existing Cons
 - **User**
 
   ```text
-  /prompts:leansdd Help me draft a Constitution for a small CLI that syncs local notes to a remote server. I want brief code best practices and a reasonable spec index for a Python project.
+  /prompts:leansdd
+  ```
+
+- **Assistant (abridged)**
+
+  ```text
+  I’m your LeanSDD specification coach for this repo. I can help with Constitutions, FR/NFR/Glossary/Architecture/Subsystem specs, spec/code reconciliation, and LeanSDD-style critique.
+
+  Tell me what you want to work on first.
+  ```
+
+- **User**
+
+  ```text
+  Help me draft a Constitution for a small CLI that syncs local notes to a remote server. I want brief code best practices and a reasonable spec index for a Python project.
   ```
 
 - **Assistant (abridged)**
@@ -83,12 +97,14 @@ Use this when bootstrapping LeanSDD for a project or tightening an existing Cons
 
 Use this when you want to create or refine individual spec files while staying within LeanSDD boundaries.
 
+After you have run `/prompts:leansdd` in this repo, you can ask for focused spec help like this.
+
 **Example (FR authoring)**
 
 - **User**
 
   ```text
-  /prompts:leansdd Draft a new `docs/fr-note-sync.md` for my notes CLI. It should cover the user starting a sync, handling connectivity errors, and showing a summary of changes. Keep it short and include a few acceptance scenarios with stable IDs.
+  Draft a new `docs/fr-note-sync.md` for my notes CLI. It should cover the user starting a sync, handling connectivity errors, and showing a summary of changes. Keep it short and include a few acceptance scenarios with stable IDs.
   ```
 
 - **Assistant (abridged)**
@@ -114,7 +130,7 @@ Use this when you have code changes or failures and want to see how they line up
 - **User**
 
   ```text
-  /prompts:leansdd I’ve added a retry-on-failure feature to the sync engine. Here’s the diff (staged). Compare it with `docs/fr-note-sync.md` and tell me what parts of the FR are now outdated or incomplete. Suggest updates but don’t rewrite the whole file unless necessary.
+  I’ve added a retry-on-failure feature to the sync engine. Here’s the diff (staged). Compare it with `docs/fr-note-sync.md` and tell me what parts of the FR are now outdated or incomplete. Suggest updates but don’t rewrite the whole file unless necessary.
   ```
 
 - **Assistant (abridged)**
@@ -138,7 +154,7 @@ Use this when you want a LeanSDD-style review rather than new content.
 - **User**
 
   ```text
-  /prompts:leansdd Review `docs/fr-login.md` and `docs/nfr.md` for LeanSDD issues. Point out where they’re too verbose, mixing concerns, or leaking data models/UI copy. Suggest concrete, high-level improvements rather than rewriting everything.
+  Review `docs/fr-login.md` and `docs/nfr.md` for LeanSDD issues. Point out where they’re too verbose, mixing concerns, or leaking data models/UI copy. Suggest concrete, high-level improvements rather than rewriting everything.
   ```
 
 - **Assistant (abridged)**
@@ -159,11 +175,7 @@ Use this when you want a LeanSDD-style review rather than new content.
 
 ## Conversation flow and scope
 
-- `/prompts:leansdd` does not create modes or subtasks; you stay in one conversation.
+- Run `/prompts:leansdd` once to load the LeanSDD assistant for a new conversation; its first reply is a brief welcome and an invitation to describe your task, not an automatic tour of your specs.
 - You control the scope: it works best when you focus on a small set of files or a specific diff rather than your entire codebase at once.
-- You can call `/prompts:leansdd` multiple times in the same repo as your specs evolve:
-  - First to draft or refine the Constitution.
-  - Later to add or adjust FRs/NFRs/Architecture/Subsystems.
-  - Again to critique your specs or reconcile them with new code changes.
+- As your specs evolve, you can either keep working in the same conversation or start a fresh `/prompts:leansdd` session for a new phase of work (for example, drafting the Constitution, later adding FRs/NFRs, then doing reconciliation or critique).
 - At any time, you can paste spec files, code snippets, or `git diff` output; the assistant will adapt to what you provide and ask focused clarifying questions only when needed.
-
