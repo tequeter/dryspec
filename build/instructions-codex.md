@@ -81,7 +81,7 @@ Codex CLI does not expose "modes" or "subtasks". The `/prompts:leansdd` prompt b
 
 ### Slash-command prompt
 
-Create or update the file `packages/Codex/lsdd.md` in Codex CLI’s prompt format:
+Create or update the file `packages/Codex/leansdd.md` in Codex CLI’s prompt format:
 
 ```markdown
 ---
@@ -93,7 +93,7 @@ You are an expert LeanSDD assistant…
 
 The user MAY provide additional instructions after the slash-command (for example, `/prompts:leansdd` followed by a brief task description). These additional instructions will be appended to the command's prompt body; design the prompt so that it treats the appended text as the primary task description and adapts accordingly.
 
-The body of `packages/Codex/lsdd.md` SHALL implement the requirements described in the sections above.
+The body of `packages/Codex/leansdd.md` SHALL implement the requirements described in the sections above.
 
 ### UI documentation
 
@@ -123,4 +123,4 @@ constraints above, then:
   authoring, specification changes, code/spec reconciliation, and critique),
   while remaining a single, reusable prompt with no explicit modes or subtask
   constructs and no built-in workflows.
-- Output the requested files `packages/Codex/lsdd.md` and `UI-Codex.md`.
+- Output the requested files `packages/Codex/leansdd.md` and `UI-Codex.md`.
