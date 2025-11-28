@@ -25,17 +25,13 @@ reconciling specs and code.
 
 Therefore, the `/prompts:leansdd` prompt body MUST:
 
-- Treat the user’s request as the driver for the interaction. The prompt SHALL
-  instruct the agent to:
-  - Ask a short, focused list of clarifying questions when the goal,
-    constraints, or target specs are ambiguous instead of assuming missing
-    context on its own.
-  - Interpret the user’s description of the task (for example, drafting specs,
-    critiquing them, or reconciling specs and code) and apply the relevant
-    LeanSDD knowledge accordingly, without inventing additional tasks or
-    hidden workflows.
-  - Adapt its behavior to the user’s stated task while remaining within the
-    same conversation and without spawning "subtasks" or switching "modes".
+- Apply the clarifying-questions and "user request drives the workflow"
+  pattern from `build/instructions.md` within Codex CLI’s single, mode-less
+  conversation model.
+- Interpret the user’s description of the task (for example, drafting specs,
+  critiquing them, or reconciling specs and code) using the shared LeanSDD
+  knowledge, without inventing additional hidden workflows or speculative
+  subtasks.
 
 ### Capabilities covered by `/prompts:leansdd`
 
@@ -70,7 +66,8 @@ The prompt SHALL describe the agent’s abilities and constraints as domain know
 
 ### Context management in Codex CLI
 
-Codex CLI does not expose "modes" or "subtasks". The `/prompts:leansdd` prompt body MUST therefore:
+Given Codex CLI’s single-conversation, mode-less model, the `/prompts:leansdd`
+prompt body MUST:
 
 - Encourage the agent to keep contexts small and focused by:
   - Working on one clearly defined concern at a time (for example, a single FR file, a small set of related specs, or a limited diff).
