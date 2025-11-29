@@ -49,13 +49,13 @@ The following generic index is a default template for projects that do not yet h
 
 > The formal specifications are organized as follows:
 >
-> | File                   | Notes                                           | Upper limits per file (target: half) |
-> | ---------------------- | ----------------------------------------------- | ---------------------- |
-> | `docs/fr-*.md`         | For user-visible features or library interface. | 1200 words <br> 3 short paragraphs context <br> 10 bullets behavior (each 2 sentences max) <br> 7 scenarios (each 8 lines max). |
-> | `docs/nfr.md`          | For non-functional requirements.                | 1300 words, 10 NFR areas, 40 bullets total. |
-> | `docs/glossary.md`     | Optional.                                       | 1600 words, 40 terms (3 sentences each). |
-> | `docs/architecture.md` | Optional.                                       | 1600 words |
-> | `docs/sub-*.md`        | For the major internal software components.     | 1300 words |
+> | File                         | Notes                                           | Upper limits per file (target: half) |
+> | ----------------------       | ----------------------------------------------- | ---------------------- |
+> | `docs/specs/fr-*.md`         | For user-visible features or library interface. | 1200 words <br> 3 short paragraphs context <br> 10 bullets behavior (each 2 sentences max) <br> 7 scenarios (each 8 lines max). |
+> | `docs/specs/nfr.md`          | For non-functional requirements.                | 1300 words, 10 NFR areas, 40 bullets total. |
+> | `docs/specs/glossary.md`     | Optional.                                       | 1600 words, 40 terms (3 sentences each). |
+> | `docs/specs/architecture.md` | Optional.                                       | 1600 words |
+> | `docs/specs/sub-*.md`        | For the major internal software components.     | 1300 words |
 
 <!-- markdownlint-restore -->
 
@@ -87,7 +87,7 @@ When the user asks to change a spec, prefer coherent destructive edits:
 
 Always respect the roles of each spec file type and keep content in the right place. If the user mixes concerns, suggest moving content to the appropriate file instead of silently accepting it.
 
-### Functional Requirements (`docs/fr-*.md`)
+### Functional Requirements (`docs/specs/fr-*.md`)
 
 Purpose:
 
@@ -106,12 +106,12 @@ Content:
 
 Naming and scope:
 
-- Each FR file SHALL have a consistent, semantically meaningful name (for example `docs/fr-user-signup.md`, not `docs/fr-core.md`).
+- Each FR file SHALL have a consistent, semantically meaningful name (for example `docs/specs/fr-user-signup.md`, not `docs/specs/fr-core.md`).
 - The file SHALL unambiguously identify exactly one functional requirement or tightly coupled journey.
 - There SHALL NOT be a second canonical identifier for the same FR inside the file; scenario‑level anchors like `#happy-path` are fine.
 - Do not go down to method signatures, database schema, or algorithmic details in FRs.
 
-### Non‑Functional Requirements (`docs/nfr.md`)
+### Non‑Functional Requirements (`docs/specs/nfr.md`)
 
 Purpose:
 
@@ -128,7 +128,7 @@ Scope:
 - Do not duplicate FR behavior here.
 - Avoid full data models, protocol specs, or UI copy; reference them conceptually if needed.
 
-### Glossary (`docs/glossary.md`)
+### Glossary (`docs/specs/glossary.md`)
 
 Purpose:
 
@@ -139,7 +139,7 @@ Constraints:
 - Glossary entries should be concise and precise (for example, 1–3 sentences each).
 - The Glossary SHALL NOT be used as a UI phrase‑book. Avoid storing UI copy or wording variants here.
 
-### Architecture (`docs/architecture.md`)
+### Architecture (`docs/specs/architecture.md`)
 
 Purpose:
 
@@ -155,7 +155,7 @@ Constraints:
 - Stay at a high level: components, responsibilities, major data/control flows, and important design decisions.
 - Do NOT include code listings or pseudo‑code, and avoid method‑level detail.
 
-### Subsystems (`docs/sub-*.md`)
+### Subsystems (`docs/specs/sub-*.md`)
 
 Purpose:
 
@@ -175,7 +175,7 @@ Constraints:
 
 ### Other files and out‑of‑scope content
 
-The user MAY maintain additional documentation files under `docs/` for topics that are out of scope for LeanSDD specs. You SHALL NOT create or update such files unless the user explicitly instructs you to do so, and you SHALL avoid stuffing their details into FR/NFR/Architecture/Subsystem specs.
+The user MAY maintain additional documentation files under `docs/specs/` for topics that are out of scope for LeanSDD specs. You SHALL NOT create or update such files unless the user explicitly instructs you to do so, and you SHALL avoid stuffing their details into FR/NFR/Architecture/Subsystem specs.
 
 Out‑of‑scope topics include:
 

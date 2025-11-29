@@ -4,7 +4,7 @@ This document explains how to use LeanSDD from RooCode using modes and slash-com
 
 ## Available modes
 
-- `LeanSDD` — Agile specification coach that understands the LeanSDD framework. It focuses on FR/NFR/Glossary/Architecture/Subsystem specs under `docs/`, keeps them short and dense, and follows the Git/context rules from the Constitution.
+- `LeanSDD` — Agile specification coach that understands the LeanSDD framework. It focuses on FR/NFR/Glossary/Architecture/Subsystem specs under `docs/specs/`, keeps them short and dense, and follows the Git/context rules from the Constitution.
 - `Ask` (built-in) — Large‑context mode that reads and summarizes sizable chunks of code or diffs. The agent uses it from sub‑tasks when it needs broad code context, then brings back concise findings to `LeanSDD`.
 
 ## Available slash-commands
@@ -29,14 +29,14 @@ Each command:
 2. In the main RooCode chat: run `/lsdd-init-existing`.
 3. LeanSDD checks `git status` and verifies that a Constitution is present; if it is missing or obviously incomplete, it asks you to pause and fix it before proceeding.
 4. LeanSDD (in a sub‑task, Ask mode) reads and summarizes the code in a chosen subsystem directory, capturing responsibilities, external behaviors, and candidate FR/NFR/Glossary/Architecture notes in a short, dense list.
-5. Back in the main chat, LeanSDD turns those notes into concise updates for `docs/architecture.md`, `docs/sub-*.md`, and initial `docs/fr-*.md`/`docs/nfr.md`/`docs/glossary.md`, suggests staging the spec files, and may open another sub‑task in LeanSDD mode to critique the staged specs.
+5. Back in the main chat, LeanSDD turns those notes into concise updates for `docs/specs/architecture.md`, `docs/specs/sub-*.md`, and initial `docs/specs/fr-*.md`/`docs/specs/nfr.md`/`docs/specs/glossary.md`, suggests staging the spec files, and may open another sub‑task in LeanSDD mode to critique the staged specs.
 
 ### Greenfield: `/lsdd-init-new`
 
 1. In the main RooCode chat: run `/lsdd-init-new` to start the Greenfield helper.
 2. LeanSDD confirms that this is a new project, asks a few clarifying questions, and helps you draft the Constitution text (one‑paragraph description plus code best practices).
 3. Outside chat: copy the proposed Constitution into `AGENTS.md`/`CLAUDE.md` (or equivalent) and save it so it is always loaded.
-4. LeanSDD (in a sub‑task, LeanSDD mode) creates short, skeletal `docs/fr-*.md`, `docs/nfr.md`, `docs/glossary.md`, and `docs/architecture.md`/`docs/sub-*.md` entries that respect LeanSDD limits and leave detailed design to later.
+4. LeanSDD (in a sub‑task, LeanSDD mode) creates short, skeletal `docs/specs/fr-*.md`, `docs/specs/nfr.md`, `docs/specs/glossary.md`, and `docs/specs/architecture.md`/`docs/specs/sub-*.md` entries that respect LeanSDD limits and leave detailed design to later.
 5. Back in the main chat, LeanSDD summarizes what was written, suggests staging the new spec files, and reminds you to use `/lsdd-change` for the first real feature change.
 
 ### Specification‑Driven Change: `/lsdd-change`

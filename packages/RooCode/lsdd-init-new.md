@@ -36,22 +36,22 @@ Follow these rules and steps:
      - Expected high-level architecture (e.g., services, tiers, major components).
    - Summarize the answers and propose:
      - A small set of FR files (major user journeys or API areas).
-     - Initial NFR areas for `docs/nfr.md`.
-     - Candidate subsystems for `docs/sub-*.md` and whether a global `docs/architecture.md` is warranted.
+     - Initial NFR areas for `docs/specs/nfr.md`.
+     - Candidate subsystems for `docs/specs/sub-*.md` and whether a global `docs/specs/architecture.md` is warranted.
 
 5. **Draft minimal spec skeletons**
    - In `LeanSDD` mode (possibly using a `new_task`), create or refine:
-     - `docs/fr-*.md` files with:
+     - `docs/specs/fr-*.md` files with:
        - A short description from the user’s point of view.
        - A few high-signal acceptance scenarios, each with a stable identifier, leaving detailed behavior for later refinement.
-     - `docs/nfr.md` with headings for the main NFR areas and concise bullets.
-     - `docs/glossary.md` with only the most important domain terms, each defined in a few sentences.
-     - `docs/architecture.md` and/or `docs/sub-*.md` describing the intended high-level structure and key subsystems, naming important internal interfaces without going into signatures or code.
+     - `docs/specs/nfr.md` with headings for the main NFR areas and concise bullets.
+     - `docs/specs/glossary.md` with only the most important domain terms, each defined in a few sentences.
+     - `docs/specs/architecture.md` and/or `docs/specs/sub-*.md` describing the intended high-level structure and key subsystems, naming important internal interfaces without going into signatures or code.
    - Explicitly avoid writing detailed data models, external API contracts, or UI phrase-books; mention them only at a high level when needed.
    - Keep all files well within LeanSDD size limits; favor placeholders and TODO markers over bloated prose.
 
 6. **Protect and critique**
-   - Propose staging the new spec files (for example with `git add docs/...`) and clearly list what will be staged; ask for user confirmation before executing Git commands.
+   - Propose staging the new spec files (for example with `git add docs/specs/...`) and clearly list what will be staged; ask for user confirmation before executing Git commands.
    - Launch a `new_task` in `LeanSDD` mode dedicated to critiquing the staged specs. In that sub-task:
      - Check that each file respects its role and boundaries.
      - Check for unnecessary verbosity, repeated content, or hidden assumptions.

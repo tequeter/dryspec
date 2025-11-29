@@ -40,19 +40,19 @@ The agent SHALL NOT edit the Constitution without an explicit request from the u
 
 > The formal specifications are organized as follows:
 >
-> | File                   | Notes                                           | Upper limits per file (target: half) |
-> | ---------------------- | ----------------------------------------------- | ---------------------- |
-> | `docs/fr-*.md`         | For user-visible features or library interface. | 1200 words <br> 3 short paragraphs context <br> 10 bullets behavior (each 2 sentences max) <br> 7 scenarios (each 8 lines max). |
-> | `docs/nfr.md`          | For non-functional requirements.                | 1300 words, 10 NFR areas, 40 bullets total. |
-> | `docs/glossary.md`     | Optional.                                       | 1600 words, 40 terms (3 sentences each). |
-> | `docs/architecture.md` | Optional.                                       | 1600 words |
-> | `docs/sub-*.md`        | For the major internal software components.     | 1300 words |
+> | File                         | Notes                                           | Upper limits per file (target: half) |
+> | ----------------------       | ----------------------------------------------- | ---------------------- |
+> | `docs/specs/fr-*.md`         | For user-visible features or library interface. | 1200 words <br> 3 short paragraphs context <br> 10 bullets behavior (each 2 sentences max) <br> 7 scenarios (each 8 lines max). |
+> | `docs/specs/nfr.md`          | For non-functional requirements.                | 1300 words, 10 NFR areas, 40 bullets total. |
+> | `docs/specs/glossary.md`     | Optional.                                       | 1600 words, 40 terms (3 sentences each). |
+> | `docs/specs/architecture.md` | Optional.                                       | 1600 words |
+> | `docs/specs/sub-*.md`        | For the major internal software components.     | 1300 words |
 
 <!-- markdownlint-restore -->
 
 ### Functional Requirements (FR)
 
-The software SHALL have functional requirements documented as `docs/fr-*.md`. This is the What and Why.
+The software SHALL have functional requirements documented as `docs/specs/fr-*.md`. This is the What and Why.
 
 - For an application, do specify the major, user-visible requirements.
 - For a library, do specify the interface.
@@ -67,12 +67,12 @@ The FR specification file:
   - They SHALL have an identifier to reference in associated executable tests (e.g. `fr-login.md#happy-path`).
 - All sections combined, it SHALL describe the expected behavior unambiguously, including the error conditions.
 - MAY have a priority (MoSCoW method) expressed.
-- SHALL have a consistent and semantically meaningful name (no `docs/fr-core.md`).
+- SHALL have a consistent and semantically meaningful name (no `docs/specs/fr-core.md`).
 - Unambiguously identifies the FR. There SHALL NOT be a second canonical identifier listed inside the file. Scenario-level anchors `#happy-path` are fine.
 
 #### Non-functional Requirements (NFR)
 
-The software SHALL have non-functional requirements documented as `docs/nfr.md`. This is a single file for ease of loading into a coding agent's context.
+The software SHALL have non-functional requirements documented as `docs/specs/nfr.md`. This is a single file for ease of loading into a coding agent's context.
 
 To allow deep hyperlinking, individual NFRs must have simple, immutable headings.
 
@@ -87,13 +87,13 @@ See also: [Non-functional requirement](https://en.wikipedia.org/wiki/Non-functio
 
 ### Glossary
 
-The software SHOULD have a `docs/glossary.md` concisely defining the non-obvious terms and domain concepts used throughout the specification, code, and UI.
+The software SHOULD have a `docs/specs/glossary.md` concisely defining the non-obvious terms and domain concepts used throughout the specification, code, and UI.
 
 The Glossary SHALL NOT be used as a UI phrase-book.
 
 ### Architecture
 
-The software MAY have a general architecture and technical choices document as `docs/architecture.md`. This is the How.
+The software MAY have a general architecture and technical choices document as `docs/specs/architecture.md`. This is the How.
 
 If not specified, that information must be provided in the subsystems.
 
@@ -101,7 +101,7 @@ If not specified, that information must be provided in the subsystems.
 
 We call subsystems the major internal software components, delimited by stable code boundaries (modules, packages, crates, ...).
 
-Each subsystem must be specified as `docs/sub-*.md`.
+Each subsystem must be specified as `docs/specs/sub-*.md`.
 
 The file SHALL at least contain a description of what the subsystem does.
 

@@ -17,11 +17,11 @@ You can invoke it from any repository where you want to apply LeanSDD-style spec
 
 - **Specification structure**
   - Understands the standard LeanSDD spec layout:
-    - `docs/fr-*.md` for Functional Requirements (FRs).
-    - `docs/nfr.md` for Non-Functional Requirements (NFRs).
-    - `docs/glossary.md` for domain terms.
-    - `docs/architecture.md` for global architecture and technical choices.
-    - `docs/sub-*.md` for major internal subsystems.
+    - `docs/specs/fr-*.md` for Functional Requirements (FRs).
+    - `docs/specs/nfr.md` for Non-Functional Requirements (NFRs).
+    - `docs/specs/glossary.md` for domain terms.
+    - `docs/specs/architecture.md` for global architecture and technical choices.
+    - `docs/specs/sub-*.md` for major internal subsystems.
   - Uses the generic Specification index (file roles and size limits) as a fallback when your Constitution does not define its own, but always defers to project-specific rules.
 
 - **Agile-spec constraints**
@@ -104,7 +104,7 @@ After you have run `/prompts:leansdd` in this repo, you can ask for focused spec
 - **User**
 
   ```text
-  Draft a new `docs/fr-note-sync.md` for my notes CLI. It should cover the user starting a sync, handling connectivity errors, and showing a summary of changes. Keep it short and include a few acceptance scenarios with stable IDs.
+  Draft a new `docs/specs/fr-note-sync.md` for my notes CLI. It should cover the user starting a sync, handling connectivity errors, and showing a summary of changes. Keep it short and include a few acceptance scenarios with stable IDs.
   ```
 
 - **Assistant (abridged)**
@@ -130,18 +130,18 @@ Use this when you have code changes or failures and want to see how they line up
 - **User**
 
   ```text
-  I’ve added a retry-on-failure feature to the sync engine. Here’s the diff (staged). Compare it with `docs/fr-note-sync.md` and tell me what parts of the FR are now outdated or incomplete. Suggest updates but don’t rewrite the whole file unless necessary.
+  I’ve added a retry-on-failure feature to the sync engine. Here’s the diff (staged). Compare it with `docs/specs/fr-note-sync.md` and tell me what parts of the FR are now outdated or incomplete. Suggest updates but don’t rewrite the whole file unless necessary.
   ```
 
 - **Assistant (abridged)**
 
   ```text
   I’ll:
-  - Summarize the current behavior described in `docs/fr-note-sync.md`.
+  - Summarize the current behavior described in `docs/specs/fr-note-sync.md`.
   - Compare it to the diff to identify mismatches (e.g., new retry behavior not mentioned in the FR, updated error messages).
   - Propose targeted edits to the FR, keeping it concise and destructive (no patch notes).
 
-  If you paste the current content of `docs/fr-note-sync.md` and the diff, I can point out exactly which bullets and scenarios to update.
+  If you paste the current content of `docs/specs/fr-note-sync.md` and the diff, I can point out exactly which bullets and scenarios to update.
   ```
 
 
@@ -154,7 +154,7 @@ Use this when you want a LeanSDD-style review rather than new content.
 - **User**
 
   ```text
-  Review `docs/fr-login.md` and `docs/nfr.md` for LeanSDD issues. Point out where they’re too verbose, mixing concerns, or leaking data models/UI copy. Suggest concrete, high-level improvements rather than rewriting everything.
+  Review `docs/specs/fr-login.md` and `docs/specs/nfr.md` for LeanSDD issues. Point out where they’re too verbose, mixing concerns, or leaking data models/UI copy. Suggest concrete, high-level improvements rather than rewriting everything.
   ```
 
 - **Assistant (abridged)**

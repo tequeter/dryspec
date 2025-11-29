@@ -28,22 +28,22 @@ Follow these rules and steps:
 
 3. **Update FRs, NFRs, and Glossary (first pass)**
    - In a dedicated `new_task` with `LeanSDD` mode:
-     - Identify which `docs/fr-*.md` files need updates or new entries, and modify them to reflect the requested change from the user’s perspective.
+     - Identify which `docs/specs/fr-*.md` files need updates or new entries, and modify them to reflect the requested change from the user’s perspective.
      - Add or adjust a small number of acceptance scenarios, each with a stable identifier; do not explode the number of scenarios.
-     - Update `docs/nfr.md` only if the change affects cross-cutting qualities; keep headings stable and bullets concise.
-     - Update `docs/glossary.md` only when new domain terms or meanings appear; define them briefly and avoid UI phrase-books.
+     - Update `docs/specs/nfr.md` only if the change affects cross-cutting qualities; keep headings stable and bullets concise.
+     - Update `docs/specs/glossary.md` only when new domain terms or meanings appear; define them briefly and avoid UI phrase-books.
    - Refactor existing text as needed rather than adding "patch notes" sections; keep each file short, cohesive, and DRY.
 
 4. **Update Architecture and Subsystems (second pass)**
    - In a separate `new_task` with `LeanSDD` mode:
      - Use `git diff` on the FR/NFR/Glossary files from the previous step as input and derive the architectural and subsystem implications.
-     - Update `docs/architecture.md` if there is a globally relevant structural change; otherwise, keep architecture details in `docs/sub-*.md`.
-     - Update the affected `docs/sub-*.md` files to describe how responsibilities or internal interfaces change, naming only major classes/modules/functions and avoiding signatures or code.
+     - Update `docs/specs/architecture.md` if there is a globally relevant structural change; otherwise, keep architecture details in `docs/specs/sub-*.md`.
+     - Update the affected `docs/specs/sub-*.md` files to describe how responsibilities or internal interfaces change, naming only major classes/modules/functions and avoiding signatures or code.
    - Avoid embedding data models, external API contracts, or UI strings in these specs; reference them only at a high level.
 
 5. **Protect spec changes with Git**
    - Summarize which spec files were touched and why.
-   - Propose staging only the relevant spec files (for example using `git add docs/...`) and ask the user for explicit confirmation before running any Git commands.
+   - Propose staging only the relevant spec files (for example using `git add docs/specs/...`) and ask the user for explicit confirmation before running any Git commands.
    - Ensure that code changes remain unstaged at this point; this workflow is spec-first.
 
 6. **Critique step**
