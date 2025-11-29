@@ -101,7 +101,7 @@ Content:
 - Behavior bullets that describe key requirements and main error conditions.
 - Acceptance scenarios from the user’s perspective.
   - Scenarios MAY use a Gherkin‑like structure (`Given/When/Then`) but do not need full formal Gherkin.
-  - Each scenario SHALL have a stable identifier slug (for example `happy-path`) so tests can link to it as `fr-login.md#happy-path` while the heading text stays human‑friendly (for example `### Happy path`).
+  - Each scenario SHALL have a stable identifier slug (for example `happy-path`) so tests can link to it as `fr-login.md#happy-path` while the heading text stays human‑friendly (for example `### Happy path`, which is auto‑converted to `#happy-path`; do not append `{#happy-path}`).
 - Optionally, a MoSCoW priority (Must/Should/Could/Won’t).
 
 Naming and scope:

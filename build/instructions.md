@@ -37,7 +37,8 @@ verbatim), in addition to the Specification index table:
     public surface for libraries. Acceptance scenarios MAY be Gherkin-like,
     and each scenario SHOULD have a stable identifier slug (for example
     `happy-path`) so tests can link to it as `fr-login.md#happy-path` while
-    the heading text stays human-friendly (for example `### Happy path`). FRs
+    the heading text stays human-friendly (for example `### Happy path`,
+    which is auto-converted to `#happy-path`; do not append `{#happy-path}`). FRs
     MAY record priority using MoSCoW.
   - Non-Functional Requirements (NFRs): cross-cutting quality and constraint
     requirements, not implementation details.
