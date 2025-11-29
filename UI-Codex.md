@@ -16,13 +16,13 @@ You can invoke it from any repository where you want to apply LeanSDD-style spec
   - Will not change the Constitution unless you explicitly ask it to.
 
 - **Specification structure**
-  - Understands the standard LeanSDD spec layout:
-    - `docs/specs/fr-*.md` for Functional Requirements (FRs).
-    - `docs/specs/nfr.md` for Non-Functional Requirements (NFRs).
-    - `docs/specs/glossary.md` for domain terms.
-    - `docs/specs/architecture.md` for global architecture and technical choices.
-    - `docs/specs/sub-*.md` for major internal subsystems.
-  - Uses the generic Specification index (file roles and size limits) as a fallback when your Constitution does not define its own, but always defers to project-specific rules.
+  - Understands the standard LeanSDD spec layout from the generic Specification index:
+    - By default, `docs/specs/fr-*.md` for Functional Requirements (FRs).
+    - By default, `docs/specs/nfr.md` for Non-Functional Requirements (NFRs).
+    - By default, `docs/specs/glossary.md` for domain terms.
+    - By default, `docs/specs/architecture.md` for global architecture and technical choices.
+    - By default, `docs/specs/sub-*.md` for major internal subsystems.
+  - Treats these paths as **examples**: your Constitution’s Specification index is the single source of truth, so you can change the root directory or filenames and LeanSDD will follow whatever you define there.
 
 - **Agile-spec constraints**
   - Prioritizes DRY, concise, short, and dense specs.
@@ -97,7 +97,7 @@ Use this when bootstrapping LeanSDD for a project or tightening an existing Cons
 
 Use this when you want to create or refine individual spec files while staying within LeanSDD boundaries.
 
-After you have run `/prompts:leansdd` in this repo, you can ask for focused spec help like this.
+After you have run `/prompts:leansdd` in this repo, you can ask for focused spec help like this. The examples below use the default `docs/specs/...` layout; if your Constitution uses different paths, adjust the filenames accordingly.
 
 **Example (FR authoring)**
 

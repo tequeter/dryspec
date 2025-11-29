@@ -44,7 +44,7 @@ When the user asks for help drafting or refining a Constitution:
 
 ## Generic specification index (fallback template)
 
-The following generic index is a default template for projects that do not yet have their own Specification index. Embed or adapt it when asked to bootstrap a project, but always defer to any project‑specific index in the Constitution.
+The following generic index is a default template for projects that do not yet have their own Specification index. Embed or adapt it when asked to bootstrap a project, but always defer to any project-specific index in the Constitution.
 
 <!-- markdownlint-disable MD033 -->
 
@@ -60,7 +60,9 @@ The following generic index is a default template for projects that do not yet h
 
 <!-- markdownlint-restore -->
 
-You SHALL respect whichever limits the Constitution specifies. When authoring or revising specs, keep files well below their limits when possible, and call out when the user’s request would clearly exceed them.
+Projects MAY adapt this table to their own directory layout, file naming, and per-file limits. The project-specific Specification index in the Constitution is the single source of truth for the actual paths and limits.
+
+You SHALL respect whichever limits and locations the Constitution specifies. When authoring or revising specs, keep files well below their limits when possible, and call out when the user’s request would clearly exceed them.
 
 
 ## Agile specification principles
@@ -88,7 +90,9 @@ When the user asks to change a spec, prefer coherent destructive edits:
 
 Always respect the roles of each spec file type and keep content in the right place. If the user mixes concerns, suggest moving content to the appropriate file instead of silently accepting it.
 
-### Functional Requirements (`docs/specs/fr-*.md`)
+Where this section mentions concrete paths (such as `docs/specs/...`), treat them as examples based on the generic index; at runtime, always follow the actual locations from the project’s Specification index.
+
+### Functional Requirements (FR files)
 
 Purpose:
 
@@ -107,12 +111,12 @@ Content:
 
 Naming and scope:
 
-- Each FR file SHALL have a consistent, semantically meaningful name (for example `docs/specs/fr-user-signup.md`, not `docs/specs/fr-core.md`).
+- Each FR file SHALL have a consistent, semantically meaningful name (for example `fr-user-signup.md` rather than a generic `fr-core.md` in the default layout).
 - The file SHALL unambiguously identify exactly one functional requirement or tightly coupled journey.
 - There SHALL NOT be a second canonical identifier for the same FR inside the file; scenario‑level anchors like `#happy-path` are fine.
 - Do not go down to method signatures, database schema, or algorithmic details in FRs.
 
-### Non‑Functional Requirements (`docs/specs/nfr.md`)
+### Non‑Functional Requirements (NFR file)
 
 Purpose:
 
@@ -129,7 +133,7 @@ Scope:
 - Do not duplicate FR behavior here.
 - Avoid full data models, protocol specs, or UI copy; reference them conceptually if needed.
 
-### Glossary (`docs/specs/glossary.md`)
+### Glossary (Glossary file)
 
 Purpose:
 
@@ -140,7 +144,7 @@ Constraints:
 - Glossary entries should be concise and precise (for example, 1–3 sentences each).
 - The Glossary SHALL NOT be used as a UI phrase‑book. Avoid storing UI copy or wording variants here.
 
-### Architecture (`docs/specs/architecture.md`)
+### Architecture (Architecture file)
 
 Purpose:
 
@@ -156,7 +160,7 @@ Constraints:
 - Stay at a high level: components, responsibilities, major data/control flows, and important design decisions.
 - Do NOT include code listings or pseudo‑code, and avoid method‑level detail.
 
-### Subsystems (`docs/specs/sub-*.md`)
+### Subsystems (Subsystem spec files)
 
 Purpose:
 
@@ -176,7 +180,7 @@ Constraints:
 
 ### Other files and out‑of‑scope content
 
-The user MAY maintain additional documentation files under `docs/specs/` for topics that are out of scope for LeanSDD specs. You SHALL NOT create or update such files unless the user explicitly instructs you to do so, and you SHALL avoid stuffing their details into FR/NFR/Architecture/Subsystem specs.
+The user MAY maintain additional documentation files alongside their main specs (for example under `docs/specs/` in the generic layout) for topics that are out of scope for LeanSDD specs. You SHALL NOT create or update such files unless the user explicitly instructs you to do so, and you SHALL avoid stuffing their details into FR/NFR/Architecture/Subsystem specs.
 
 Out‑of‑scope topics include:
 

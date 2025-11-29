@@ -50,9 +50,11 @@ The agent SHALL NOT edit the Constitution without an explicit request from the u
 
 <!-- markdownlint-restore -->
 
+Projects MAY adapt this table to their own directory layout, file naming, and per-file limits. The project-specific Specification index in the Constitution is the single source of truth for the actual paths and limits.
+
 ### Functional Requirements (FR)
 
-The software SHALL have functional requirements documented as `docs/specs/fr-*.md`. This is the What and Why.
+The software SHALL have functional requirements documented (generic layout: `docs/specs/fr-*.md`). This is the What and Why.
 
 - For an application, do specify the major, user-visible requirements.
 - For a library, do specify the interface.
@@ -67,12 +69,12 @@ The FR specification file:
   - They SHALL have an identifier to reference in associated executable tests (e.g. `fr-login.md#happy-path`).
 - All sections combined, it SHALL describe the expected behavior unambiguously, including the error conditions.
 - MAY have a priority (MoSCoW method) expressed.
-- SHALL have a consistent and semantically meaningful name (no `docs/specs/fr-core.md`).
+- SHALL have a consistent and semantically meaningful name (for example, avoid generic names like `fr-core.md` in the default layout).
 - Unambiguously identifies the FR. There SHALL NOT be a second canonical identifier listed inside the file. Scenario-level anchors `#happy-path` are fine.
 
 #### Non-functional Requirements (NFR)
 
-The software SHALL have non-functional requirements documented as `docs/specs/nfr.md`. This is a single file for ease of loading into a coding agent's context.
+The software SHALL have non-functional requirements documented (generic layout: `docs/specs/nfr.md`). This is a single file for ease of loading into a coding agent's context.
 
 To allow deep hyperlinking, individual NFRs must have simple, immutable headings.
 
@@ -87,13 +89,13 @@ See also: [Non-functional requirement](https://en.wikipedia.org/wiki/Non-functio
 
 ### Glossary
 
-The software SHOULD have a `docs/specs/glossary.md` concisely defining the non-obvious terms and domain concepts used throughout the specification, code, and UI.
+The software SHOULD have a Glossary file (for example `docs/specs/glossary.md` in the generic layout) concisely defining the non-obvious terms and domain concepts used throughout the specification, code, and UI.
 
 The Glossary SHALL NOT be used as a UI phrase-book.
 
 ### Architecture
 
-The software MAY have a general architecture and technical choices document as `docs/specs/architecture.md`. This is the How.
+The software MAY have a general architecture and technical choices document (generic layout:  `docs/specs/architecture.md`). This is the How.
 
 If not specified, that information must be provided in the subsystems.
 
@@ -101,7 +103,7 @@ If not specified, that information must be provided in the subsystems.
 
 We call subsystems the major internal software components, delimited by stable code boundaries (modules, packages, crates, ...).
 
-Each subsystem must be specified as `docs/specs/sub-*.md`.
+Each subsystem must be specified in a Subsystem spec file (generic layout: `docs/specs/sub-*.md`).
 
 The file SHALL at least contain a description of what the subsystem does.
 
@@ -116,7 +118,7 @@ It SHALL NOT include subsystem code, pseudo-code, or anything of that sort.
 
 ### Other files
 
-The user MAY create other files under `docs/specs/`.
+The user MAY create other specification files.
 
 Most notably, these topics are currently out of LeanSDD's scope. The agent SHALL NOT attempt to create or update them without explicit instruction by the user.
 

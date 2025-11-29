@@ -28,7 +28,7 @@ Follow these rules and steps:
    - Ask a short, focused list of clarifying questions about the application/library, main technologies, and what parts of the repo are most important to cover first.
 
 3. **Propose subsystems and plan the exploration**
-   - Using the repo structure (for example, 1–2 levels under `src` or similar), propose a candidate list of subsystems that would map well to `docs/specs/sub-*.md`.
+   - Using the repo structure (for example, 1–2 levels under `src` or similar), propose a candidate list of subsystems that would map well to the project’s Subsystem spec files (for example `docs/specs/sub-*.md` in the generic layout).
    - Keep the proposal concise and explain how each subsystem boundary relates to code directories or modules.
    - Agree with the user on which subsystems to explore first.
 
@@ -42,16 +42,16 @@ Follow these rules and steps:
 
 5. **Bootstrap specs from findings**
    - In `LeanSDD` mode, use the collected subsystem findings to:
-     - Draft or refine `docs/specs/architecture.md` with system-wide structure and key technical choices.
-     - Draft or refine `docs/specs/sub-*.md` for each subsystem, describing responsibilities and high-level internal interfaces (classes/modules/functions), but not method signatures.
-     - Identify major user-visible behaviors or public API areas and create initial `docs/specs/fr-*.md` files that:
+     - Draft or refine the Architecture spec file (for example `docs/specs/architecture.md` in the generic layout) with system-wide structure and key technical choices.
+     - Draft or refine Subsystem spec files (for example `docs/specs/sub-*.md` in the generic layout) for each subsystem, describing responsibilities and high-level internal interfaces (classes/modules/functions), but not method signatures.
+     - Identify major user-visible behaviors or public API areas and create initial FR spec files (for example `docs/specs/fr-*.md` in the generic layout) that:
        - Are written from the user’s perspective.
        - List a small number of high-signal acceptance scenarios, each with a stable anchor identifier.
-     - Populate `docs/specs/nfr.md` with clearly headed NFRs and `docs/specs/glossary.md` with concise term definitions.
+     - Populate the NFR file (for example `docs/specs/nfr.md` in the generic layout) with clearly headed NFRs and the Glossary file (for example `docs/specs/glossary.md`) with concise term definitions.
    - Enforce concision and LeanSDD size limits; refactor existing text if needed instead of appending "notes" sections.
 
 6. **Protect work with Git and critique**
-   - Suggest staging the spec files you created or edited (for example with `git add docs/specs/...`) and clearly explain which paths you are about to stage.
+   - Suggest staging the spec files you created or edited (for example with `git add` on the paths from the project’s Specification index, such as `docs/specs/...` in the generic layout) and clearly explain which paths you are about to stage.
    - Remind the user that they SHOULD confirm any Git operation before you run it.
    - Start a `new_task` in `LeanSDD` mode to critique the staged specs. In that sub-task:
      - Check that each concern (FR, NFR, Glossary, Architecture, Subsystem) lives in the right file type.

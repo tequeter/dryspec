@@ -44,8 +44,10 @@ verbatim), in addition to the Specification index table:
     requirements, not implementation details.
   - Glossary: definitions of important domain and project terms.
   - Architecture and Subsystems: describe major components and their internal
-    interfaces between subsystems. If there is no global `docs/specs/architecture.md`,
-    capture relevant architectural and technical choices in subsystem specs.
+    interfaces between subsystems. If there is no global Architecture file
+    defined in the project’s Specification index (for example
+    `docs/specs/architecture.md` in the generic layout), capture relevant
+    architectural and technical choices in subsystem specs instead.
     Subsystem specs MAY name major classes/functions in their internal
     interfaces but SHALL NOT go down to method signatures or contain code or
     pseudo-code.

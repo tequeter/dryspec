@@ -28,22 +28,22 @@ Follow these rules and steps:
 
 3. **Update FRs, NFRs, and Glossary (first pass)**
    - In a dedicated `new_task` with `LeanSDD` mode:
-     - Identify which `docs/specs/fr-*.md` files need updates or new entries, and modify them to reflect the requested change from the user’s perspective.
+     - Identify which FR spec files (as defined in the project’s Specification index, for example `docs/specs/fr-*.md` in the generic layout) need updates or new entries, and modify them to reflect the requested change from the user’s perspective.
      - Add or adjust a small number of acceptance scenarios, each with a stable identifier; do not explode the number of scenarios.
-     - Update `docs/specs/nfr.md` only if the change affects cross-cutting qualities; keep headings stable and bullets concise.
-     - Update `docs/specs/glossary.md` only when new domain terms or meanings appear; define them briefly and avoid UI phrase-books.
+     - Update the NFR file (for example `docs/specs/nfr.md` in the generic layout) only if the change affects cross-cutting qualities; keep headings stable and bullets concise.
+     - Update the Glossary file (for example `docs/specs/glossary.md` in the generic layout) only when new domain terms or meanings appear; define them briefly and avoid UI phrase-books.
    - Refactor existing text as needed rather than adding "patch notes" sections; keep each file short, cohesive, and DRY.
 
 4. **Update Architecture and Subsystems (second pass)**
    - In a separate `new_task` with `LeanSDD` mode:
      - Use `git diff` on the FR/NFR/Glossary files from the previous step as input and derive the architectural and subsystem implications.
-     - Update `docs/specs/architecture.md` if there is a globally relevant structural change; otherwise, keep architecture details in `docs/specs/sub-*.md`.
-     - Update the affected `docs/specs/sub-*.md` files to describe how responsibilities or internal interfaces change, naming only major classes/modules/functions and avoiding signatures or code.
+     - Update the Architecture spec file (for example `docs/specs/architecture.md` in the generic layout) if there is a globally relevant structural change; otherwise, keep architecture details in the Subsystem spec files (for example `docs/specs/sub-*.md`).
+     - Update the affected Subsystem spec files to describe how responsibilities or internal interfaces change, naming only major classes/modules/functions and avoiding signatures or code.
    - Avoid embedding data models, external API contracts, or UI strings in these specs; reference them only at a high level.
 
 5. **Protect spec changes with Git**
    - Summarize which spec files were touched and why.
-   - Propose staging only the relevant spec files (for example using `git add docs/specs/...`) and ask the user for explicit confirmation before running any Git commands.
+   - Propose staging only the relevant spec files (for example using `git add` on the paths from the project’s Specification index, such as `docs/specs/...` in the generic layout) and ask the user for explicit confirmation before running any Git commands.
    - Ensure that code changes remain unstaged at this point; this workflow is spec-first.
 
 6. **Critique step**
@@ -57,4 +57,3 @@ Follow these rules and steps:
    - Once the user is satisfied, keep the spec changes staged (or have them committed) and summarize the final spec delta in a few bullets.
    - Explicitly instruct the user to hand off to a coding agent (for example, a Coder mode) that will implement the change using the staged specs as primary guidance.
    - Mention that `/lsdd-reconcile` can be used later if code changes drift away from the updated specs.
-
