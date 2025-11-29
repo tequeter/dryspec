@@ -35,9 +35,10 @@ verbatim), in addition to the Specification index table:
 - **File roles and semantics**
   - Functional Requirements (FRs): major user-visible behavior for apps, or
     public surface for libraries. Acceptance scenarios MAY be Gherkin-like,
-    and each scenario SHOULD have a stable identifier suitable for linking
-    from executable tests (for example `fr-login.md#happy-path`). FRs MAY
-    record priority using MoSCoW.
+    and each scenario SHOULD have a stable identifier slug (for example
+    `happy-path`) so tests can link to it as `fr-login.md#happy-path` while
+    the heading text stays human-friendly (for example `### Happy path`). FRs
+    MAY record priority using MoSCoW.
   - Non-Functional Requirements (NFRs): cross-cutting quality and constraint
     requirements, not implementation details.
   - Glossary: definitions of important domain and project terms.
