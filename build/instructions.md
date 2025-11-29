@@ -39,7 +39,7 @@ verbatim), in addition to the Specification index table:
     `happy-path`), but this identifier SHALL be implicit: choose a heading
     like `### Happy path` and rely on automatic `#happy-path` anchors. Do not
     repeat the slug in the heading text (no `{#happy-path}`, no
-    <code>(`happy-path`)</code>, etc.). FRs MAY record priority using MoSCoW.
+    `(happy-path)`, etc.). FRs MAY record priority using MoSCoW.
   - Non-Functional Requirements (NFRs): cross-cutting quality and constraint
     requirements, not implementation details.
   - Glossary: definitions of important domain and project terms.

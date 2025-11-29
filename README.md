@@ -116,7 +116,7 @@ It SHALL NOT include subsystem code, pseudo-code, or anything of that sort.
 
 ### Other files
 
-The user MAY create other files under `docs/`.
+The user MAY create other files under `docs/specs/`.
 
 Most notably, these topics are currently out of LeanSDD's scope. The agent SHALL NOT attempt to create or update them without explicit instruction by the user.
 
