@@ -9,7 +9,7 @@ of truth for shared behavior and only add what is unique to that runtime.
 ## Shared LeanSDD knowledge
 
 Any runtime-specific system prompt or mode that implements LeanSDD MUST embed
-these concepts from `README.md` (summarized in your own words, not copied
+these concepts from `SPECIFICATION.md` (summarized in your own words, not copied
 verbatim), in addition to the Specification index table:
 
 - **Constitution**
@@ -62,7 +62,7 @@ verbatim), in addition to the Specification index table:
 - **Cross-repository linking and workflows**
   - Support cross-repo linking via canonical URLs when multi-repo systems
     reference documentation in other repos.
-  - Assume the Git usage described in the "Workflows" section of `README.md`:
+  - Assume the Git usage described in the "Workflows" section of `SPECIFICATION.md`:
     clean working tree when it matters, staging (`git add`) as protection for
     spec changes, and user-confirmed Git operations.
   - Encourage minimal, step-scoped contexts instead of accumulating large,
@@ -73,7 +73,7 @@ verbatim), in addition to the Specification index table:
 All LeanSDD-aware runtime prompts and modes SHALL follow these rules for the
 Specification index:
 
-- Embed a verbatim copy of the "Specification index" table from `README.md` as
+- Embed a verbatim copy of the "Specification index" table from `SPECIFICATION.md` as
   a generic default, so it can be used when bootstrapping projects that do not
   yet have a Constitution.
 - Make it explicit that when a project-specific Constitution (for example
@@ -89,12 +89,12 @@ These constraints apply to the static system prompts / modes for all runtimes:
 
 - **Self-contained and repo-agnostic**
   - The runtime prompt or mode MUST be self-contained with respect to LeanSDD:
-    do not rely on `README.md` being present at runtime.
+    do not rely on `SPECIFICATION.md` being present at runtime.
   - MUST NOT reference "the LeanSDD repo" or similar: it is not accessible and
     SHOULD NOT be mentioned to the user.
 
-- **Use of `README.md`**
-  - Do **not** paste large chunks of `README.md` verbatim into runtime prompts
+- **Use of `SPECIFICATION.md`**
+  - Do **not** paste large chunks of `SPECIFICATION.md` verbatim into runtime prompts
     or modes, **except** for the "Specification index" table described above.
   - For all other LeanSDD content, compress and paraphrase so the system text
     stays short, dense, and DRY while still giving the agent enough static
@@ -142,11 +142,11 @@ Workarounds:
 When this repo is used from Codex CLI (for example, to generate prompts or
 mode files based on `build/instructions-*.md`):
 
-- Read `README.md` very carefully. Because it exceeds the tool output limit,
+- Read `SPECIFICATION.md` very carefully. Because it exceeds the tool output limit,
   when using `shell_command` you SHOULD read it in two calls of about
   150 lines each.
 - Do not explore files other than those explicitly listed in the task
-  instructions (typically `README.md`, this file, and one runtime-specific
+  instructions (typically `SPECIFICATION.md`, this file, and one runtime-specific
   `build/instructions-*.md` file); other files are not relevant to the
   prompt-design tasks.
 - This repo currently does not have an `AGENTS.md` or similar Constitution

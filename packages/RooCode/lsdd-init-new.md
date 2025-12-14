@@ -26,7 +26,7 @@ Follow these rules and steps:
    - Help the user craft or refine the Constitution (kept in `AGENTS.md`, `CLAUDE.md`, or equivalent):
      - A one-paragraph description of what the software does and why.
      - Project-wide code best practices and constraints.
-     - A project-specific Specification index based on the generic LeanSDD table (for example by copying and tailoring the index from the LeanSDD README, possibly changing the root directory from `docs/specs/` if they prefer a different layout).
+     - A project-specific Specification index based on the generic LeanSDD table.
    - Keep the Constitution concise and high-signal; do not replicate future FR/NFR details here.
 
 4. **Elicit requirements and architecture outline**

@@ -126,7 +126,7 @@ The recipient of `UI-Codex.md` is the end-user of Codex CLI. Do not include info
 Follow the common instructions in `build/instructions.md` and the Codex CLI
 constraints above, then:
 
-- Review `README.md` and this file for Codex-specific details not already
+- Review `SPECIFICATION.md` and this file for Codex-specific details not already
   covered in `build/instructions.md`.
 - Design the `/prompts:leansdd` prompt body so that it supports all LeanSDD
   tasks (Constitution work, Greenfield/Brownfield-like specification

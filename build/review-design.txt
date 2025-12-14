@@ -1,10 +1,10 @@
 As an experienced software architect and prompt engineer, review carefully the attached file and help me think about the SDD framework I'm designing.
 
-The README, beyond human-visible documentation, and along further instructions, will be used to generate the system prompts of the Spec Author and Spec Critic. I'll use a highly knowledgeable model for that task, such as GPT-5.1.
+The SPECIFICATION, beyond human-visible documentation, and along further instructions, will be used to generate the system prompts of the Spec Author and Spec Critic. I'll use a highly knowledgeable model for that task, such as GPT-5.1.
 
-1. Do I have incoherent or under-specified parts in README.md? Note: only tell me about issues that could confuse the reader or a LLM, not about nice-to-haves.
+1. Do I have incoherent or under-specified parts in SPECIFICATION.md? Note: only tell me about issues that could confuse the reader or a LLM, not about nice-to-haves.
 
-2. Do I have overspecified, non-DRY, overly verbose etc. parts in README.md?
+2. Do I have overspecified, non-DRY, overly verbose etc. parts in SPECIFICATION.md?
 
 3. What blind spots might I have in my thinking?
 

@@ -20,7 +20,7 @@ described in `build/instructions.md`.
 
 ### Other modes
 
-Additionally, you SHALL the built-in "Ask" mode to read and summarize sizable chunks of code. This lets the user configure an expensive model for specification work and a cheap model with a huge context for code exploration.
+Additionally, you SHALL use the built-in "Ask" mode to read and summarize sizable chunks of code. This lets the user configure an expensive model for specification work and a cheap model with a huge context for code exploration.
 
 ### Slash-commands
 
@@ -34,7 +34,7 @@ Create these slash-commands as a mean to guide the user through the correspondin
 Each slash-command prompt SHALL:
 
 - Make use of the `switch_mode` tool rather than expecting or asking the user to select the LeanSDD mode.
-- Assume the Git and context-management rules specified in the "Workflows" section of `README.md`:
+- Assume the Git and context-management rules specified in the "Workflows" section of `SPECIFICATION.md`:
   - Start from, or explicitly check for, a clean Git state where that matters.
   - Use staging (`git add`) as the primary mechanism to protect specification changes, and remind the user that Git operations SHOULD be explicitly confirmed.
   - Encourage minimal, step-scoped contexts and the use of fresh sub-tasks rather than accumulating too much unrelated context.
@@ -58,7 +58,7 @@ Create or update the file `UI-RooCode.md` with the following structure:
   - Write "in a sub-task" (or similar), not "with clean context" - that's what the user will see in RooCode's UI.
   - Mention the actions that the user must do, such as completing their Constitution. If these actions do not require usage of a LLM, mark them clearly outside of any chat.
   - Use numbered lists for ease of reading.
-- Available slash-commands, when to use and what they do (assume the user already read `README.md`, keep it DRY).
+- Available slash-commands, when to use and what they do (assume the user already read `SPECIFICATION.md`, keep it DRY).
 - Available modes, same thing.
 
 The recipient of this file is the end-user. Do not include information only useful for the agent.
@@ -109,7 +109,7 @@ The user MAY provide additional instructions after the slash-command, they will 
 Follow the common instructions in `build/instructions.md` and the RooCode
 constraints above, then:
 
-- Review `README.md` and this file for RooCode-specific details not already
+- Review `SPECIFICATION.md` and this file for RooCode-specific details not already
   covered in `build/instructions.md`.
 - Design the prompts for the slash-commands and modes so they support the
   LeanSDD workflows (Brownfield/Greenfield/spec-driven change/code-driven
