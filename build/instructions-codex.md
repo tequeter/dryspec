@@ -1,33 +1,33 @@
-# LeanSDD in Codex CLI
+# DrySpec in Codex CLI
 
 ## Goal
 
-Package LeanSDD into a single reusable Codex CLI prompt. Once installed in Codex CLI, it SHALL be usable in other projects without access to the LeanSDD repo and files.
+Package DrySpec into a single reusable Codex CLI prompt. Once installed in Codex CLI, it SHALL be usable in other projects without access to the DrySpec repo and files.
 
 ## Features
 
-### LeanSDD prompt `/prompts:leansdd`
+### DrySpec prompt `/prompts:dryspec`
 
-LeanSDD in Codex CLI is exposed only as the `/prompts:leansdd` slash-command.
+DrySpec in Codex CLI is exposed only as the `/prompts:dryspec` slash-command.
 Its prompt body:
 
-- SHALL implement the shared LeanSDD knowledge, Specification index rules, and
+- SHALL implement the shared DrySpec knowledge, Specification index rules, and
   prompt-design constraints defined in `build/instructions.md`.
 - SHALL NOT define or assume any explicit "modes", "subtasks", or multi-command
   workflows. Codex CLI does not support those features; all behavior MUST be
   driven by the user’s instructions within a single ongoing conversation.
-- SHALL treat the slash-command invocation itself as a "load LeanSDD" action
-  only: when `/prompts:leansdd` is first invoked, the agent MUST NOT start
+- SHALL treat the slash-command invocation itself as a "load DrySpec" action
+  only: when `/prompts:dryspec` is first invoked, the agent MUST NOT start
   exploring specifications or code until the user sends a follow-up message
   describing a concrete task.
 
-When you design the `/prompts:leansdd` prompt body, assume the runtime context
+When you design the `/prompts:dryspec` prompt body, assume the runtime context
 described in `build/instructions.md` ("Runtime context") and the Codex-specific
 interaction pattern described below.
 
 #### Interaction pattern in Codex CLI
 
-- The user first runs `/prompts:leansdd` to load the LeanSDD-aware assistant.
+- The user first runs `/prompts:dryspec` to load the DrySpec-aware assistant.
 - The agent’s initial response SHOULD be a short confirmation of its role and
   capabilities and MAY invite the user to describe what they want to work on,
   but it MUST NOT proactively inspect or summarize any specifications or code.
@@ -35,19 +35,19 @@ interaction pattern described below.
   task (for example, drafting or refining a Constitution, authoring or updating
   specifications, critiquing specs, or reconciling specs and code).
 
-Therefore, the `/prompts:leansdd` prompt body MUST:
+Therefore, the `/prompts:dryspec` prompt body MUST:
 
 - Apply the clarifying-questions and "user request drives the workflow"
   pattern from `build/instructions.md` within Codex CLI’s single, mode-less
   conversation model.
 - Interpret the user’s description of the task (for example, drafting specs,
-  critiquing them, or reconciling specs and code) using the shared LeanSDD
+  critiquing them, or reconciling specs and code) using the shared DrySpec
   knowledge, without inventing additional hidden workflows or speculative
   subtasks.
 
-### Capabilities covered by `/prompts:leansdd`
+### Capabilities covered by `/prompts:dryspec`
 
-Because Codex CLI exposes only a single prompt for LeanSDD, the `/prompts:leansdd` body MUST give the agent dense, reusable knowledge for all of the following areas; the user will decide when and how to use them:
+Because Codex CLI exposes only a single prompt for DrySpec, the `/prompts:dryspec` body MUST give the agent dense, reusable knowledge for all of the following areas; the user will decide when and how to use them:
 
 - **Constitution knowledge**
   - Understand what belongs in a Constitution (project overview, coding norms, Specification index) and why it must stay concise and high-signal.
@@ -57,7 +57,7 @@ Because Codex CLI exposes only a single prompt for LeanSDD, the `/prompts:leansd
 - **New-project specifications**
   - Understand how to characterize a system in terms of FRs, NFRs, Glossary entries, Architecture notes, and Subsystem docs, even when no specs exist yet.
   - Know what "minimal but sufficient" initial specs look like: small files, coarse-grained FRs, sparse acceptance scenarios, and placeholder structure rather than detailed internal design.
-  - Be able to suggest reasonable file names and boundaries that respect LeanSDD size and role constraints, while leaving detailed design to later.
+  - Be able to suggest reasonable file names and boundaries that respect DrySpec size and role constraints, while leaving detailed design to later.
 
 - **Existing-codebase specifications**
   - Understand how directory structure, modules, and public APIs map to subsystems and architectural decisions.
@@ -78,7 +78,7 @@ The prompt SHALL describe the agent’s abilities and constraints as domain know
 
 ### Context management in Codex CLI
 
-Given Codex CLI’s single-conversation, mode-less model, the `/prompts:leansdd`
+Given Codex CLI’s single-conversation, mode-less model, the `/prompts:dryspec`
 prompt body MUST:
 
 - Encourage the agent to keep contexts small and focused by:
@@ -90,34 +90,34 @@ prompt body MUST:
 
 ### Slash-command prompt
 
-Create or update the file `packages/Codex/leansdd.md` in Codex CLI’s prompt format:
+Create or update the file `packages/Codex/dryspec.md` in Codex CLI’s prompt format:
 
 ```markdown
 ---
-description: LeanSDD specification coach and reviewer
+description: DrySpec specification coach and reviewer
 ---
 
-You are an expert LeanSDD assistant…
+You are an expert DrySpec assistant…
 ```
 
-Design the prompt so that `/prompts:leansdd` follows the interaction pattern
+Design the prompt so that `/prompts:dryspec` follows the interaction pattern
 defined in the "Interaction pattern in Codex CLI" section above.
 
-The body of `packages/Codex/leansdd.md` SHALL implement the requirements described in the sections above.
+The body of `packages/Codex/dryspec.md` SHALL implement the requirements described in the sections above.
 
 ### UI documentation
 
 Create or update the file `UI-Codex.md` with the following structure:
 
-- A short introduction explaining that LeanSDD is available in Codex CLI through the `/prompts:leansdd` slash-command, and that the command provides a LeanSDD-aware specification coach and reviewer.
-- A concise overview of what `/prompts:leansdd` "knows" about LeanSDD: Constitutions, FR/NFR/Glossary/Architecture/Subsystem specs, Agile-spec constraints, file roles and boundaries, and Git/context assumptions.
+- A short introduction explaining that DrySpec is available in Codex CLI through the `/prompts:dryspec` slash-command, and that the command provides a DrySpec-aware specification coach and reviewer.
+- A concise overview of what `/prompts:dryspec` "knows" about DrySpec: Constitutions, FR/NFR/Glossary/Architecture/Subsystem specs, Agile-spec constraints, file roles and boundaries, and Git/context assumptions.
 - Clear guidance on the main kinds of tasks the user can ask for, such as:
   - Drafting or refining a Constitution.
   - Authoring or updating FR/NFR/Glossary/Architecture/Subsystem specs.
   - Reconciling specs and code when they appear to diverge.
-  - Critiquing existing specs for alignment with LeanSDD rules.
-- For each type of task, one short example of how a user might invoke `/prompts:leansdd` and what kind of answer to expect. Keep examples compact (a single user message plus a brief, high-signal assistant reply), and avoid long, step-by-step workflows.
-- A brief reminder that `/prompts:leansdd` does not create modes or subtasks in Codex CLI; the user stays in a single conversation and can paste or reference files as needed.
+  - Critiquing existing specs for alignment with DrySpec rules.
+- For each type of task, one short example of how a user might invoke `/prompts:dryspec` and what kind of answer to expect. Keep examples compact (a single user message plus a brief, high-signal assistant reply), and avoid long, step-by-step workflows.
+- A brief reminder that `/prompts:dryspec` does not create modes or subtasks in Codex CLI; the user stays in a single conversation and can paste or reference files as needed.
 
 The recipient of `UI-Codex.md` is the end-user of Codex CLI. Do not include information only useful for the agent’s internal behavior or for prompt engineering.
 
@@ -128,9 +128,9 @@ constraints above, then:
 
 - Review `SPECIFICATION.md` and this file for Codex-specific details not already
   covered in `build/instructions.md`.
-- Design the `/prompts:leansdd` prompt body so that it supports all LeanSDD
+- Design the `/prompts:dryspec` prompt body so that it supports all DrySpec
   tasks (Constitution work, Greenfield/Brownfield-like specification
   authoring, specification changes, code/spec reconciliation, and critique),
   while remaining a single, reusable prompt with no explicit modes or subtask
   constructs and no built-in workflows.
-- Output the requested files `packages/Codex/leansdd.md` and `UI-Codex.md`.
+- Output the requested files `packages/Codex/dryspec.md` and `UI-Codex.md`.

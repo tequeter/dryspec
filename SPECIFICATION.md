@@ -1,4 +1,4 @@
-# LeanSDD specification
+# DrySpec specification
 
 ## Agile specifications
 
@@ -118,7 +118,7 @@ It SHALL NOT include subsystem code, pseudo-code, or anything of that sort.
 
 The user MAY create other specification files.
 
-Most notably, these topics are currently out of LeanSDD's scope. The agent SHALL NOT attempt to create or update them without explicit instruction by the user.
+Most notably, these topics are currently out of DrySpec's scope. The agent SHALL NOT attempt to create or update them without explicit instruction by the user.
 
 - The data models (schemas, invariants, privacy constraints).
 - The external contracts (third-party APIs, message formats).
@@ -134,7 +134,7 @@ Software that spans multiple repositories MAY cross-link to arbitrary, read-only
 
 About Git usage:
 
-- LeanSDD leverages Git to track ongoing changes and protect them from editing/AI mishaps.
+- DrySpec leverages Git to track ongoing changes and protect them from editing/AI mishaps.
 - Protection is typically done by staging (`git add`), but the user may perform an intermediate commit instead.
 - All workflows assume an initial **clean Git state** unless noted. The agent SHOULD check for it.
 - The workflows feature instructions to alter the Git state (`git add`, `git commit`). The agent MAY execute them, but the user SHOULD carefully OK each such attempt.
@@ -143,14 +143,14 @@ About context management:
 
 - The user or agent SHOULD use minimal, focused contexts scoped to the current step when possible. This produces better results and saves tokens.
 
-"Loading LeanSDD" (into the LLM context) may mean changing mode or entering a slash-command, [depending on your AI runtime](README.md#supported-runtimes).
+"Loading DrySpec" (into the LLM context) may mean changing mode or entering a slash-command, [depending on your AI runtime](README.md#supported-runtimes).
 
 ### Brownfield
 
 For an existing project, from the perspective of the user:
 
 - Complete your Constitution.
-- Load LeanSDD and let the agent explore the codebase.
+- Load DrySpec and let the agent explore the codebase.
   - The agent SHALL check the presence of all 3 elements of the Constitution in `AGENTS.md` or equivalent.
   - The agent SHOULD suggest a list of subsystems by listing 1-2 levels of directories, appropriate to the current language and project (for example, listing `src`).
   - You SHOULD use a dedicated context (sub-agent, sub-task) to deep-dive into each subsystem.
@@ -164,7 +164,7 @@ For an existing project, from the perspective of the user:
   - The FRs identified through codebase exploration are just a starting point and will need heavy editing.
   - The agent SHOULD suggest this step as a reminder of the process, but not perform any action on its own. The user will open supplemental chat sessions on their own if needed.
 - Stage your changes.
-- Clear and load LeanSDD again, then ask the agent to critique your specification, looking for inconsistencies. Fix as needed.
+- Clear and load DrySpec again, then ask the agent to critique your specification, looking for inconsistencies. Fix as needed.
 
 ### Greenfield
 
@@ -183,10 +183,10 @@ If useful for the task at hand, the agent SHOULD gather context using the provid
 
 From the perspective of the user:
 
-- If FRs and/or NFRs need to be updated, start with an empty context, load LeanSDD, and update the Requirements and possibly the Glossary with the help of the agent.
-- Clear the context again, load LeanSDD, and update the Architecture and/or the Subsystems with the help of the agent. Tell the agent to look at `git diff` if you changed anything in the previous step.
+- If FRs and/or NFRs need to be updated, start with an empty context, load DrySpec, and update the Requirements and possibly the Glossary with the help of the agent.
+- Clear the context again, load DrySpec, and update the Architecture and/or the Subsystems with the help of the agent. Tell the agent to look at `git diff` if you changed anything in the previous step.
 - Once satisfied with the spec update, stage it for protection.
-- You SHOULD now clear the context and have LeanSDD critique your changes. Stage again.
+- You SHOULD now clear the context and have DrySpec critique your changes. Stage again.
 - Implement the change with a Coder agent, pointing it at the staged specification changes.
 
 
@@ -197,5 +197,5 @@ This workflow is useful when either the user skipped the specification part, or 
 Either way,
 
 - Start with your code changes (and nothing else) staged in Git.
-- Ask LeanSDD to look for inconsistencies between your staged code changes and the existing specifications.
+- Ask DrySpec to look for inconsistencies between your staged code changes and the existing specifications.
 - Fix as you see fit, possibly using a new context depending on the situation. If using an agent, it SHALL ask the user when faced with conflicts.

@@ -1,4 +1,4 @@
-# LeanSDD
+# DrySpec
 
 Drive your development with Just Enough specifications.
 
@@ -10,7 +10,7 @@ Drive your development with Just Enough specifications.
 
 ## How is it different?
 
-Unlike OpenSpec, SpecKit, BMAD, etc., LeanSDD focuses on:
+Unlike OpenSpec, SpecKit, BMAD, etc., DrySpec focuses on:
 
 - Shorter is better (faster to read, fewer tokens).
 - High-level only (don't repeat the code).
@@ -33,7 +33,7 @@ Unlike OpenSpec, SpecKit, BMAD, etc., LeanSDD focuses on:
 | -------------------- | --------------------- | --------------------- | ------------------------------------- |
 | RooCode, Cline, Kilo | Mode and /-commands   | [UI](UI-RooCode.md)   | [Packages](packages/RooCode/)         |
 | Claude Code          | Skills                | (not implemented)     |                                       |
-| Codex                | Self-contained prompt | [UI](UI-Codex.md)     | [Packages](packages/Codex/leansdd.md) |
+| Codex                | Self-contained prompt | [UI](UI-Codex.md)     | [Packages](packages/Codex/dryspec.md) |
 | Web chats            | Self-contained prompt | (Try Codex's prompt?) |                                       |
 
 ## Installation

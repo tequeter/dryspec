@@ -1,14 +1,14 @@
 # Instructions common to all AI runtimes
 
-This file defines the LeanSDD rules and prompt‑design constraints that apply
+This file defines the DrySpec rules and prompt‑design constraints that apply
 to any AI runtime (Codex CLI, RooCode, Claude, etc.). Runtime‑specific
 instruction files (for example `build/instructions-codex.md` and
 `build/instructions-roocode.md`) SHOULD treat this file as the single source
 of truth for shared behavior and only add what is unique to that runtime.
 
-## Shared LeanSDD knowledge
+## Shared DrySpec knowledge
 
-Any runtime-specific system prompt or mode that implements LeanSDD MUST embed
+Any runtime-specific system prompt or mode that implements DrySpec MUST embed
 these concepts from `SPECIFICATION.md` (summarized in your own words, not copied
 verbatim), in addition to the Specification index table:
 
@@ -70,7 +70,7 @@ verbatim), in addition to the Specification index table:
 
 ## Specification index rules
 
-All LeanSDD-aware runtime prompts and modes SHALL follow these rules for the
+All DrySpec-aware runtime prompts and modes SHALL follow these rules for the
 Specification index:
 
 - Embed a verbatim copy of the "Specification index" table from `SPECIFICATION.md` as
@@ -88,15 +88,15 @@ Specification index:
 These constraints apply to the static system prompts / modes for all runtimes:
 
 - **Self-contained and repo-agnostic**
-  - The runtime prompt or mode MUST be self-contained with respect to LeanSDD:
+  - The runtime prompt or mode MUST be self-contained with respect to DrySpec:
     do not rely on `SPECIFICATION.md` being present at runtime.
-  - MUST NOT reference "the LeanSDD repo" or similar: it is not accessible and
+  - MUST NOT reference "the DrySpec repo" or similar: it is not accessible and
     SHOULD NOT be mentioned to the user.
 
 - **Use of `SPECIFICATION.md`**
   - Do **not** paste large chunks of `SPECIFICATION.md` verbatim into runtime prompts
     or modes, **except** for the "Specification index" table described above.
-  - For all other LeanSDD content, compress and paraphrase so the system text
+  - For all other DrySpec content, compress and paraphrase so the system text
     stays short, dense, and DRY while still giving the agent enough static
     knowledge to operate without this repo.
 
@@ -104,7 +104,7 @@ These constraints apply to the static system prompts / modes for all runtimes:
   - Assume that at runtime the agent will see:
     - The host project's Constitution (via `AGENTS.md`, `CLAUDE.md`, etc.),
       which SHOULD already embed the generic Specification index.
-    - The current project's specs and code, but not this LeanSDD repo.
+    - The current project's specs and code, but not this DrySpec repo.
     - The user's current message, which drives the concrete task (for example,
       drafting specs, refining them, reconciling specs and code, or critique).
 

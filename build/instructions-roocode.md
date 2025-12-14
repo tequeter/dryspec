@@ -1,16 +1,16 @@
-# LeanSDD in RooCode
+# DrySpec in RooCode
 
 ## Goal
 
-Package LeanSDD into reusable mode and prompts. Once installed in RooCode, they SHALL be usable in other projects without access to the LeanSDD repo and files.
+Package DrySpec into reusable mode and prompts. Once installed in RooCode, they SHALL be usable in other projects without access to the DrySpec repo and files.
 
 ## Features
 
-### LeanSDD mode
+### DrySpec mode
 
-LeanSDD in RooCode comes with a single "LeanSDD" mode. Its system prompt:
+DrySpec in RooCode comes with a single "DrySpec" mode. Its system prompt:
 
-- SHALL implement the shared LeanSDD knowledge, Specification index rules, and
+- SHALL implement the shared DrySpec knowledge, Specification index rules, and
   prompt-design constraints defined in `build/instructions.md`.
 - SHOULD NOT contain workflow-specific instructions; workflows are described in
   the slash-commands below.
@@ -26,19 +26,19 @@ Additionally, you SHALL use the built-in "Ask" mode to read and summarize sizabl
 
 Create these slash-commands as a means to guide the user through the corresponding workflow:
 
-- `/lsdd-init-existing` (Brownfield)
-- `/lsdd-init-new` (Greenfield)
-- `/lsdd-change` (Spec-driven change)
-- `/lsdd-reconcile` (Code-driven change)
+- `/dryspec-init-existing` (Brownfield)
+- `/dryspec-init-new` (Greenfield)
+- `/dryspec-change` (Spec-driven change)
+- `/dryspec-reconcile` (Code-driven change)
 
 Each slash-command prompt SHALL:
 
-- Make use of the `switch_mode` tool rather than expecting or asking the user to select the LeanSDD mode.
+- Make use of the `switch_mode` tool rather than expecting or asking the user to select the DrySpec mode.
 - Assume the Git and context-management rules specified in the "Workflows" section of `SPECIFICATION.md`:
   - Start from, or explicitly check for, a clean Git state where that matters.
   - Use staging (`git add`) as the primary mechanism to protect specification changes, and remind the user that Git operations SHOULD be explicitly confirmed.
   - Encourage minimal, step-scoped contexts and the use of fresh sub-tasks rather than accumulating too much unrelated context.
-- Stay DRY with respect to the mode’s `roleDefinition`: reference the relevant LeanSDD sections (e.g. Brownfield/Greenfield/Specification-Driven Change/Code-Driven Change) and their intent, but do not restate them in full; instead, summarize what the agent needs to do in that workflow and rely on the mode’s `roleDefinition` for shared rules.
+- Stay DRY with respect to the mode’s `roleDefinition`: reference the relevant DrySpec sections (e.g. Brownfield/Greenfield/Specification-Driven Change/Code-Driven Change) and their intent, but do not restate them in full; instead, summarize what the agent needs to do in that workflow and rely on the mode’s `roleDefinition` for shared rules.
 - Make use of the `update_todo_list` tool to keep track of the tasks ahead.
 
 ### Clean context
@@ -65,7 +65,7 @@ The recipient of this file is the end-user. Do not include information only usef
 
 ### Modes file
 
-Create or update the file `packages/RooCode/leansdd-modes.yaml` in the RooCode "export mode" format, which is as follows (example):
+Create or update the file `packages/RooCode/dryspec-modes.yaml` in the RooCode "export mode" format, which is as follows (example):
 
 ```yaml
 customModes:
@@ -89,7 +89,7 @@ Be sure to allow writing to all Markdown files in the project.
 
 ### Slash commands
 
-Create or update the files `packages/RooCode/lsdd-*.md` in RooCode's format, which is (example):
+Create or update the files `packages/RooCode/dryspec-*.md` in RooCode's format, which is (example):
 
 ```markdown
 ---
@@ -112,6 +112,6 @@ constraints above, then:
 - Review `SPECIFICATION.md` and this file for RooCode-specific details not already
   covered in `build/instructions.md`.
 - Design the prompts for the slash-commands and modes so they support the
-  LeanSDD workflows (Brownfield/Greenfield/spec-driven change/code-driven
+  DrySpec workflows (Brownfield/Greenfield/spec-driven change/code-driven
   change) while staying DRY with respect to the shared `roleDefinition`.
 - Output the requested files.

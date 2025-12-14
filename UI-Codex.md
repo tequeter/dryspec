@@ -1,13 +1,13 @@
-# LeanSDD in Codex CLI
+# DrySpec in Codex CLI
 
-LeanSDD is available in Codex CLI as the `/prompts:leansdd` slash-command. It provides a LeanSDD-aware specification coach and reviewer that helps you design, refine, and critique lightweight Agile specifications for your project, all within a single conversation.
+DrySpec is available in Codex CLI as the `/prompts:dryspec` slash-command. It provides a DrySpec-aware specification coach and reviewer that helps you design, refine, and critique lightweight Agile specifications for your project, all within a single conversation.
 
-You can invoke it from any repository where you want to apply LeanSDD-style specs; the assistant understands the core LeanSDD concepts and adapts to the files and Constitution in your current project.
+You can invoke it from any repository where you want to apply DrySpec-style specs; the assistant understands the core DrySpec concepts and adapts to the files and Constitution in your current project.
 
 
-## What `/prompts:leansdd` knows
+## What `/prompts:dryspec` knows
 
-`/prompts:leansdd` is preloaded with LeanSDD’s key ideas:
+`/prompts:dryspec` is preloaded with DrySpec’s key ideas:
 
 - **Constitution**
   - Assumes your project has a “Constitution” file (typically `AGENTS.md`, `CLAUDE.md`, or similar) that is always in context.
@@ -16,13 +16,13 @@ You can invoke it from any repository where you want to apply LeanSDD-style spec
   - Will not change the Constitution unless you explicitly ask it to.
 
 - **Specification structure**
-  - Understands the standard LeanSDD spec layout from the generic Specification index:
+  - Understands the standard DrySpec spec layout from the generic Specification index:
     - By default, `docs/specs/fr-*.md` for Functional Requirements (FRs).
     - By default, `docs/specs/nfr.md` for Non-Functional Requirements (NFRs).
     - By default, `docs/specs/glossary.md` for domain terms.
     - By default, `docs/specs/architecture.md` for global architecture and technical choices.
     - By default, `docs/specs/sub-*.md` for major internal subsystems.
-  - Treats these paths as **examples**: your Constitution’s Specification index is the single source of truth, so you can change the root directory or filenames and LeanSDD will follow whatever you define there.
+  - Treats these paths as **examples**: your Constitution’s Specification index is the single source of truth, so you can change the root directory or filenames and DrySpec will follow whatever you define there.
 
 - **Agile-spec constraints**
   - Prioritizes DRY, concise, short, and dense specs.
@@ -44,31 +44,31 @@ You can invoke it from any repository where you want to apply LeanSDD-style spec
   - Encourages small, focused contexts: a single FR file, a couple of related specs, or a modest diff at a time.
 
 
-## How to use `/prompts:leansdd`
+## How to use `/prompts:dryspec`
 
-Start by running `/prompts:leansdd` in Codex CLI to load the LeanSDD-aware assistant for your current repository. Its first reply is a short confirmation of its role and capabilities and an invitation to describe what you want to work on; it does not proactively scan or summarize your specs or code until you ask.
+Start by running `/prompts:dryspec` in Codex CLI to load the DrySpec-aware assistant for your current repository. Its first reply is a short confirmation of its role and capabilities and an invitation to describe what you want to work on; it does not proactively scan or summarize your specs or code until you ask.
 
-After that initial handshake, just send normal messages describing your task (for example, “Help me draft a Constitution for…” or “Review these FRs for LeanSDD issues”). `/prompts:leansdd` does not create modes or subtasks; everything happens in a single conversation where you can paste files, diffs, or summaries as needed and steer the work with follow-up questions.
+After that initial handshake, just send normal messages describing your task (for example, “Help me draft a Constitution for…” or “Review these FRs for DrySpec issues”). `/prompts:dryspec` does not create modes or subtasks; everything happens in a single conversation where you can paste files, diffs, or summaries as needed and steer the work with follow-up questions.
 
 Below are common task types and example interactions.
 
 
 ### Draft or refine a Constitution
 
-Use this when bootstrapping LeanSDD for a project or tightening an existing Constitution.
+Use this when bootstrapping DrySpec for a project or tightening an existing Constitution.
 
 **Example**
 
 - **User**
 
   ```text
-  /prompts:leansdd
+  /prompts:dryspec
   ```
 
 - **Assistant (abridged)**
 
   ```text
-  I’m your LeanSDD specification coach for this repo. I can help with Constitutions, FR/NFR/Glossary/Architecture/Subsystem specs, spec/code reconciliation, and LeanSDD-style critique.
+  I’m your DrySpec specification coach for this repo. I can help with Constitutions, FR/NFR/Glossary/Architecture/Subsystem specs, spec/code reconciliation, and DrySpec-style critique.
 
   Tell me what you want to work on first.
   ```
@@ -85,7 +85,7 @@ Use this when bootstrapping LeanSDD for a project or tightening an existing Cons
   I’ll draft a concise Constitution with:
   - A one-paragraph description of the CLI and why it exists.
   - A short list of Python best practices aligned with your goals.
-  - A project-specific Specification index based on LeanSDD’s FR/NFR/Glossary/Architecture/Subsystem structure.
+  - A project-specific Specification index based on DrySpec’s FR/NFR/Glossary/Architecture/Subsystem structure.
 
   Before I write it, a couple of clarifications:
   1) Do you expect multiple subsystems (e.g., CLI, sync engine, storage), or keep it as one subsystem for now?
@@ -95,9 +95,9 @@ Use this when bootstrapping LeanSDD for a project or tightening an existing Cons
 
 ### Author or update FR/NFR/Glossary/Architecture/Subsystem specs
 
-Use this when you want to create or refine individual spec files while staying within LeanSDD boundaries.
+Use this when you want to create or refine individual spec files while staying within DrySpec boundaries.
 
-After you have run `/prompts:leansdd` in this repo, you can ask for focused spec help like this. The examples below use the default `docs/specs/...` layout; if your Constitution uses different paths, adjust the filenames accordingly.
+After you have run `/prompts:dryspec` in this repo, you can ask for focused spec help like this. The examples below use the default `docs/specs/...` layout; if your Constitution uses different paths, adjust the filenames accordingly.
 
 **Example (FR authoring)**
 
@@ -145,16 +145,16 @@ Use this when you have code changes or failures and want to see how they line up
   ```
 
 
-### Critique existing specs for LeanSDD alignment
+### Critique existing specs for DrySpec alignment
 
-Use this when you want a LeanSDD-style review rather than new content.
+Use this when you want a DrySpec-style review rather than new content.
 
 **Example**
 
 - **User**
 
   ```text
-  Review `docs/specs/fr-login.md` and `docs/specs/nfr.md` for LeanSDD issues. Point out where they’re too verbose, mixing concerns, or leaking data models/UI copy. Suggest concrete, high-level improvements rather than rewriting everything.
+  Review `docs/specs/fr-login.md` and `docs/specs/nfr.md` for DrySpec issues. Point out where they’re too verbose, mixing concerns, or leaking data models/UI copy. Suggest concrete, high-level improvements rather than rewriting everything.
   ```
 
 - **Assistant (abridged)**
@@ -175,7 +175,7 @@ Use this when you want a LeanSDD-style review rather than new content.
 
 ## Conversation flow and scope
 
-- Run `/prompts:leansdd` once to load the LeanSDD assistant for a new conversation; its first reply is a brief welcome and an invitation to describe your task, not an automatic tour of your specs.
+- Run `/prompts:dryspec` once to load the DrySpec assistant for a new conversation; its first reply is a brief welcome and an invitation to describe your task, not an automatic tour of your specs.
 - You control the scope: it works best when you focus on a small set of files or a specific diff rather than your entire codebase at once.
-- As your specs evolve, you can either keep working in the same conversation or start a fresh `/prompts:leansdd` session for a new phase of work (for example, drafting the Constitution, later adding FRs/NFRs, then doing reconciliation or critique).
+- As your specs evolve, you can either keep working in the same conversation or start a fresh `/prompts:dryspec` session for a new phase of work (for example, drafting the Constitution, later adding FRs/NFRs, then doing reconciliation or critique).
 - At any time, you can paste spec files, code snippets, or `git diff` output; the assistant will adapt to what you provide and ask focused clarifying questions only when needed.
