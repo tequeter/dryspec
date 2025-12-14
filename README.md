@@ -10,9 +10,9 @@ Drive your development with Just Enough specifications.
 
 ## How is it different?
 
-Unlike OpenSpec, SpecKit, BMAD etc., LeanSDD focuses on:
+Unlike OpenSpec, SpecKit, BMAD, etc., LeanSDD focuses on:
 
-- Shorter is better (faster to read, less tokens).
+- Shorter is better (faster to read, fewer tokens).
 - High-level only (don't repeat the code).
 - Yet fully specified within that scope.
 - Small, high-signal, orthogonal Markdown files loaded on demand.
@@ -29,12 +29,12 @@ Unlike OpenSpec, SpecKit, BMAD etc., LeanSDD focuses on:
 
 ## Supported runtimes
 
-| AI runtime           | Approach              | Usage                | Packages                              |
-| -------------------- | --------------------- | -------------------- | ------------------------------------- |
-| RooCode, Cline, Kilo | Mode and /-commands   | [UI](UI-RooCode.md)  | [Packages](packages/RooCode/)         |
-| Claude Code          | Skills                | (not implemented)    |                                       |
-| Codex                | Self-contained prompt | [UI](UI-Codex.md)    | [Packages](packages/Codex/leansdd.md) |
-| Web chats            | Self-contained prompt | (Try Codex' prompt?) |                                       |
+| AI runtime           | Approach              | Usage                 | Packages                              |
+| -------------------- | --------------------- | --------------------- | ------------------------------------- |
+| RooCode, Cline, Kilo | Mode and /-commands   | [UI](UI-RooCode.md)   | [Packages](packages/RooCode/)         |
+| Claude Code          | Skills                | (not implemented)     |                                       |
+| Codex                | Self-contained prompt | [UI](UI-Codex.md)     | [Packages](packages/Codex/leansdd.md) |
+| Web chats            | Self-contained prompt | (Try Codex's prompt?) |                                       |
 
 ## Installation
 

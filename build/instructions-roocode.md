@@ -24,7 +24,7 @@ Additionally, you SHALL use the built-in "Ask" mode to read and summarize sizabl
 
 ### Slash-commands
 
-Create these slash-commands as a mean to guide the user through the corresponding workflow:
+Create these slash-commands as a means to guide the user through the corresponding workflow:
 
 - `/lsdd-init-existing` (Brownfield)
 - `/lsdd-init-new` (Greenfield)
@@ -43,7 +43,7 @@ Each slash-command prompt SHALL:
 
 ### Clean context
 
-For all workflow tasks that require a "clean", "empty, or "cleared" context, the agent SHALL use the `new_task` tool with the appropriate mode and instructions.
+For all workflow tasks that require a "clean", "empty", or "cleared" context, the agent SHALL use the `new_task` tool with the appropriate mode and instructions.
 
 The `new_task` prompt SHALL contain all the necessary information to carry out its task, but not more. The subtask has no access to the parent task's context.
 

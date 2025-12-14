@@ -143,21 +143,21 @@ About context management:
 
 - The user or agent SHOULD use minimal, focused contexts scoped to the current step when possible. This produces better results and saves tokens.
 
-"Loading LeanSDD" (into the LLM context) may mean changing mode, entering a slash-command etc., [depending on your AI runtime](README.md#supported-runtimes).
+"Loading LeanSDD" (into the LLM context) may mean changing mode or entering a slash-command, [depending on your AI runtime](README.md#supported-runtimes).
 
 ### Brownfield
 
-For an existing project, from the perspective of the user,
+For an existing project, from the perspective of the user:
 
 - Complete your Constitution.
 - Load LeanSDD and let the agent explore the codebase.
   - The agent SHALL check the presence of all 3 elements of the Constitution in `AGENTS.md` or equivalent.
-  - The agent SHOULD suggest a list of subsystems by listing 1-2 levels of directories, appropriate to the current language and project (such as: list `src`).
-  - You SHOULD use a dedicated context (sub-agent, sub-task) to deep-dive into each Subsystem.
-  - The sub-agent SHALL document the Subsystem, asking clarifying questions as necessary.
-  - The sub-agent SHALL return Architecture, FRs, NFRs, and Glossary concise observations to the calling agent.
+  - The agent SHOULD suggest a list of subsystems by listing 1-2 levels of directories, appropriate to the current language and project (for example, listing `src`).
+  - You SHOULD use a dedicated context (sub-agent, sub-task) to deep-dive into each subsystem.
+  - The sub-agent SHALL document the subsystem, asking clarifying questions as necessary.
+  - The sub-agent SHALL return concise observations about Architecture, FRs, NFRs, and the Glossary to the calling agent.
   - In particular, FRs are hard to reverse-engineer. The sub-agent SHALL stop at identifying possible FRs and SHALL NOT attempt describing them fully.
-- Have the calling agent document the observed Architecture, NFRs, and Glossary, again asking questions as necessary. Also init the FRs files with what was collected.
+- Have the calling agent document the observed Architecture, NFRs, and Glossary, again asking questions as necessary. Also initialize the FR files with what was collected.
 - Rework the collected information:
   - Rework the Glossary, each FR individually, the Architecture, and the NFRs.
   - If you deem agent assistance useful, use a clean context every time, reloading (just) the necessary context using `git diff`.
@@ -177,9 +177,9 @@ Then use the Specification-Driven Change workflow below to create the rest of th
 
 This is the main workflow, and the user SHOULD use it for all non-trivial changes.
 
-The agent SHALL interact with and guide the user through creating or updating the specification as per the above framework.
+The agent SHALL interact with and guide the user through creating or updating the specification using the framework above.
 
-If useful for the task at hand, the agent SHOULD gather context using the provided tools and ask as many clarifying questions as necessary to the user.
+If useful for the task at hand, the agent SHOULD gather context using the provided tools and ask as many clarifying questions as needed.
 
 From the perspective of the user:
 
