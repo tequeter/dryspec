@@ -64,18 +64,17 @@ The FR specification file:
 - SHALL have: a description from the point of view of the user.
 - SHOULD have: acceptance scenarios, again from the point of view of the user.
   - They MAY use the Gherkin structure.
-  - They SHALL be referenceable via an identifier derived automatically from the scenario heading using standard Markdown section-link conventions.
-    - Scenario headings SHALL be plain natural language, stable over time, and unique within the file. The heading text is the only in-file identifier.
+  - Scenario headings MUST follow "Headings & stable links" above.
 - All sections combined, it SHALL describe the expected behavior unambiguously, including the error conditions.
 - MAY have a priority (MoSCoW method) expressed.
 - SHALL have a consistent and semantically meaningful name (for example, avoid generic names like `fr-core.md` in the default layout).
-- Unambiguously identifies the FR. There SHALL NOT be a second canonical identifier listed inside the file. Deep-linking to scenario sections is expected.
+- Unambiguously identifies the FR.
 
 ### Non-functional Requirements (NFR)
 
 The software SHALL have non-functional requirements documented (generic layout: `docs/specs/nfr.md`). This is a single file for ease of loading into a coding agent's context.
 
-To allow stable section linking, individual NFRs must have simple, immutable headings that are unique within the file and written as plain natural language.
+Individual NFRs that are intended to be referenced MUST follow "Headings & stable links" above.
 
 Common NFR categories include:
 
@@ -124,6 +123,13 @@ Most notably, these topics are currently out of DrySpec's scope. The agent SHALL
 - The data models (schemas, invariants, privacy constraints).
 - The external contracts (third-party APIs, message formats).
 - The UI wording.
+
+
+## Headings & stable links
+
+Any specification content intended to be referenced later (notably FR acceptance scenarios and individual NFRs) MUST be referenceable via the Markdown renderer’s automatically derived section identifier from its heading.
+
+Such headings SHALL be plain natural language, stable over time, and unique within their file. The heading text is the sole in-file identifier; specifications SHALL NOT define any secondary identifiers for these items.
 
 
 ## Cross-repository support
