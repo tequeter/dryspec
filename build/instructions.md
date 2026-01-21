@@ -136,10 +136,12 @@ Workarounds:
 - In critique/review steps, explicitly look for hidden assumptions and ask the
   user to confirm or correct them.
 
-## Build-harness instructions (Codex CLI)
+## Build-time instructions (Codex CLI)
 
-When this repo is used from Codex CLI (for example, to generate prompts or
-mode files based on `build/instructions-*.md`):
+This section applies only when **Codex CLI is used as the build agent inside this DrySpec repository**
+(for example, to generate or update `packages/*` based on `build/instructions-*.md`).
+It does **not** describe behavior for end-users who load the resulting `packages/Codex/*` prompts into Codex
+while working in a client project.
 
 - Read `SPECIFICATION.md` very carefully. Because it exceeds the tool output limit,
   when using `shell_command` you SHOULD read it in two calls of about
