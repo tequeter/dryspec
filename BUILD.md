@@ -56,6 +56,14 @@ Edit_Inputs --> Update_Packages
 
 The instructions *are* the prompt, you don't need anything else fancy.
 
-### Model
+## Authoring assistance
 
-I use exclusively GPT 5.x High for this task.
+Useful questions to ask a LLM once in a while:
+
+1. Do I have incoherent or under-specified parts in SPECIFICATION.md? Note: only tell me about issues that could confuse the reader or a LLM, not about nice-to-haves.
+2. Do I have overspecified, non-DRY, overly verbose etc. parts in my input files (as per [Inputs](BUILD.md#inputs))?
+3. Do I have overspecified, non-DRY, overly verbose etc. parts in my package files (as per [Outputs](BUILD.md#outputs))?
+
+## Model
+
+I use exclusively GPT 5.x High for authoring and building tasks.
