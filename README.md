@@ -36,6 +36,10 @@ Unlike OpenSpec, SpecKit, BMAD, etc., DrySpec focuses on:
 | Codex                | Self-contained prompt | [UI](UI-Codex.md)     | [Packages](packages/Codex/dryspec.md) |
 | Web chats            | Self-contained prompt | (Try Codex's prompt?) |                                       |
 
+## Recommended models
+
+I'm very pleased with GPT 5.x High for this task. In the Claude family I'd try Opus with *think harder* or *ultrathink*.
+
 ## Installation
 
 - No CLI tool.
