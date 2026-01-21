@@ -8,64 +8,37 @@ of truth for shared behavior and only add what is unique to that runtime.
 
 ## Shared DrySpec knowledge
 
-Any runtime-specific system prompt or mode that implements DrySpec MUST embed
-these concepts from `SPECIFICATION.md` (summarized in your own words, not copied
-verbatim), in addition to the Specification index table:
+`SPECIFICATION.md` is the single source of truth for DrySpec semantics and workflows.
+Any runtime-specific system prompt or mode that implements DrySpec MUST encode the
+rules from `SPECIFICATION.md` in summarized form (do not copy large chunks verbatim),
+in addition to the Specification index table.
 
-- **Constitution**
-  - Explain what the Constitution is (location, contents, always-loaded
-    nature) and how it relates to the rest of the specs.
-  - State clearly that the agent SHALL NOT edit the Constitution unless the
-    user explicitly asks for that change.
+Minimum coverage checklist:
 
-- **Agile specifications**
-  - Emphasize DRY, concise specs with explicit size limits.
-  - Keep files loosely coupled and highly cohesive: one clear responsibility
-    per spec file.
-  - Separate internal semantics from UI wording; UI copy belongs in dedicated
-    wording files, not in FRs/NFRs.
-  - Prefer sparse, high-signal acceptance scenarios instead of exhaustive
-    test catalogs.
-  - Forbid incremental spec patches and "proposed changes" inside specs;
-    edits SHOULD be destructive and coherent.
-  - Clarify that detailed internal interfaces and tests beyond acceptance are
-    out of scope for specs, and that minor design decisions are left to the
-    coder agent and its human operator.
+- **Constitution + Specification index**
+  - Constitution contents and why it’s always loaded.
+  - The agent SHALL NOT edit the Constitution unless the user explicitly asks.
+  - The Constitution’s Specification index overrides the embedded generic table.
 
-- **File roles and semantics**
-  - Functional Requirements (FRs): major user-visible behavior for apps, or
-    public surface for libraries. Acceptance scenarios MAY be Gherkin-like and
-    MUST follow the "Headings & stable links" rule in `SPECIFICATION.md`. When
-    describing this in a runtime prompt, do so without including any literal
-    section-link fragment strings or inline-ID syntax. FRs MAY record priority
-    using MoSCoW.
-  - Non-Functional Requirements (NFRs): cross-cutting quality and constraint
-    requirements, not implementation details.
-  - Glossary: definitions of important domain and project terms.
-  - Architecture and Subsystems: describe major components and their internal
-    interfaces between subsystems. If there is no global Architecture file
-    defined in the project’s Specification index (for example
-    `docs/specs/architecture.md` in the generic layout), capture relevant
-    architectural and technical choices in subsystem specs instead.
-    Subsystem specs MAY name major classes/functions in their internal
-    interfaces but SHALL NOT go down to method signatures or contain code or
-    pseudo-code.
+- **Agile specification constraints**
+  - DRY, short, dense; explicit per-file size limits.
+  - Prefer destructive, coherent edits; forbid incremental spec patches and “proposed changes”.
+  - Keep files loosely coupled and highly cohesive (one responsibility per file).
+  - Keep detailed internal interfaces and tests beyond acceptance out of scope; minor decisions stay with the coder agent + user.
+  - Distinguish internal semantics (errors, conditions) from external presentation (UX vernacular).
 
-- **Other files and boundaries**
-  - Respect the boundaries described in "Other files" (data models, external
-    contracts, UI wording).
-  - The agent SHALL NOT create or update such files unless explicitly
-    instructed, and SHALL avoid stuffing these details into FR/NFR/
-    Architecture/Subsystem specs.
+- **File roles and boundaries**
+  - FRs: user-visible requirements (or public surface for libraries); sparse acceptance scenarios; priorities MAY be MoSCoW.
+  - NFRs: cross-cutting qualities/constraints; not implementation details.
+  - Glossary: domain/project term definitions.
+  - Architecture + Subsystems: major components and internal interfaces between subsystems; no code/pseudo-code; no method signatures.
+  - “Other files” out-of-scope boundaries: data models, external contracts, UI wording (do not create/update unless explicitly instructed).
 
-- **Cross-repository linking and workflows**
-  - Support cross-repo linking via canonical URLs when multi-repo systems
-    reference documentation in other repos.
-  - Assume the Git usage described in the "Workflows" section of `SPECIFICATION.md`:
-    clean working tree when it matters, staging (`git add`) as protection for
-    spec changes, and user-confirmed Git operations.
-  - Encourage minimal, step-scoped contexts instead of accumulating large,
-    unfocused histories.
+- **Headings & stable links**: Spec items intended to be referenced later MUST be addressable via their heading-derived section identifier: use plain, stable, unique natural-language headings as the sole in-file identifiers, and do not include any literal section-link fragments or inline-ID syntax in the runtime prompt/mode.
+- **Cross-repository linking** via canonical URLs.
+- **Workflows**
+  - Git usage assumptions (clean state when it matters; staging as protection; Git ops user-confirmed).
+  - Context management expectations (small, step-scoped contexts; prefer fresh tasks over accumulating unrelated history).
 
 ## Specification index rules
 

@@ -110,8 +110,8 @@ The body of `packages/Codex/dryspec.md` SHALL implement the requirements describ
 Create or update the file `UI-Codex.md` with the following structure:
 
 - A short introduction explaining that DrySpec is available in Codex CLI through the `/prompts:dryspec` slash-command, and that the command provides a DrySpec-aware specification coach and reviewer.
-- A concise overview of what `/prompts:dryspec` "knows" about DrySpec: Constitutions, FR/NFR/Glossary/Architecture/Subsystem specs, Agile-spec constraints, file roles and boundaries, and Git/context assumptions.
-- Clear guidance on the main kinds of tasks the user can ask for, such as:
+- A concise overview of what `/prompts:dryspec` provides, based on the DrySpec rules and workflows in `SPECIFICATION.md` and the build constraints in `build/instructions.md`.
+- Clear guidance on the main kinds of tasks the user can ask for, aligned with `SPECIFICATION.md`, such as:
   - Drafting or refining a Constitution.
   - Authoring or updating FR/NFR/Glossary/Architecture/Subsystem specs.
   - Reconciling specs and code when they appear to diverge.
@@ -128,9 +128,8 @@ constraints above, then:
 
 - Review `SPECIFICATION.md` and this file for Codex-specific details not already
   covered in `build/instructions.md`.
-- Design the `/prompts:dryspec` prompt body so that it supports all DrySpec
-  tasks (Constitution work, Greenfield/Brownfield-like specification
-  authoring, specification changes, code/spec reconciliation, and critique),
-  while remaining a single, reusable prompt with no explicit modes or subtask
-  constructs and no built-in workflows.
+- Design the `/prompts:dryspec` prompt body so that it supports the DrySpec
+  workflows and critique use-cases in `SPECIFICATION.md`, while remaining a
+  single, reusable prompt with no explicit modes or subtask constructs and no
+  built-in workflows.
 - Output the requested files `packages/Codex/dryspec.md` and `UI-Codex.md`.
