@@ -39,4 +39,4 @@ Unlike OpenSpec, SpecKit, BMAD, etc., DrySpec focuses on:
 ## Installation
 
 - No CLI tool.
-- Drop the package files in your runtime's folder(s).
+- Drop the package files in your runtime's folder(s) - see your runtime's package above for details.
