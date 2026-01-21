@@ -106,14 +106,14 @@ Content:
 - Behavior bullets that describe key requirements and main error conditions.
 - Acceptance scenarios from the user’s perspective.
   - Scenarios MAY use a Gherkin‑like structure (`Given/When/Then`) but do not need full formal Gherkin.
-  - Each scenario SHALL have a stable identifier slug (for example `happy-path`), but this identifier SHALL be implicit: choose a heading like `### Happy path` and rely on automatic `#happy-path` anchors. Do not repeat the slug in the heading text (no `{#happy-path}`, no `(happy-path)`, etc.).
+  - Each scenario SHALL be referenceable via the Markdown renderer’s automatically derived section identifier from its heading. Scenario headings SHALL be plain natural language, stable over time, and unique within the file; do not add explicit identifiers in heading text.
 - Optionally, a MoSCoW priority (Must/Should/Could/Won’t).
 
 Naming and scope:
 
 - Each FR file SHALL have a consistent, semantically meaningful name (for example `fr-user-signup.md` rather than a generic `fr-core.md` in the default layout).
 - The file SHALL unambiguously identify exactly one functional requirement or tightly coupled journey.
-- There SHALL NOT be a second canonical identifier for the same FR inside the file; scenario‑level anchors like `#happy-path` are fine.
+- There SHALL NOT be a second canonical identifier for the same FR inside the file; deep-linking to scenario sections should rely on standard Markdown section links derived from headings.
 - Do not go down to method signatures, database schema, or algorithmic details in FRs.
 
 ### Non‑Functional Requirements (NFR file)
@@ -125,7 +125,7 @@ Purpose:
 Structure:
 
 - A single file with clearly separated areas (for example, headings for Performance, Reliability, Security, etc.).
-- Each individual NFR should have a simple, immutable heading for deep hyperlinking.
+- Each individual NFR should have a simple, immutable heading that is unique within the file, so other artifacts can link to it reliably.
 - Content should be concise bullets describing constraints and targets, not implementation instructions.
 
 Scope:

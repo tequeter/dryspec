@@ -35,11 +35,12 @@ verbatim), in addition to the Specification index table:
 - **File roles and semantics**
   - Functional Requirements (FRs): major user-visible behavior for apps, or
     public surface for libraries. Acceptance scenarios MAY be Gherkin-like,
-    and each scenario SHOULD have a stable identifier slug (for example
-    `happy-path`), but this identifier SHALL be implicit: choose a heading
-    like `### Happy path` and rely on automatic `#happy-path` anchors. Do not
-    repeat the slug in the heading text (no `{#happy-path}`, no
-    `(happy-path)`, etc.). FRs MAY record priority using MoSCoW.
+    and each scenario SHOULD be referenceable via the Markdown renderer’s
+    automatically derived section identifier from its heading. Describe this
+    in the runtime prompt without including any literal section-link fragment
+    strings or inline-ID syntax: emphasize plain natural-language headings
+    that are stable and unique within the file. FRs MAY record priority using
+    MoSCoW.
   - Non-Functional Requirements (NFRs): cross-cutting quality and constraint
     requirements, not implementation details.
   - Glossary: definitions of important domain and project terms.

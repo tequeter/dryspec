@@ -46,7 +46,7 @@ Follow these rules and steps:
      - Draft or refine Subsystem spec files (for example `docs/specs/sub-*.md` in the generic layout) for each subsystem, describing responsibilities and high-level internal interfaces (classes/modules/functions), but not method signatures.
      - Identify major user-visible behaviors or public API areas and create initial FR spec files (for example `docs/specs/fr-*.md` in the generic layout) that:
        - Are written from the user’s perspective.
-       - List a small number of high-signal acceptance scenarios, each with a stable anchor identifier.
+       - List a small number of high-signal acceptance scenarios, each with a stable, heading-derived section identifier (use plain natural-language headings that are unique within the file).
      - Populate the NFR file (for example `docs/specs/nfr.md` in the generic layout) with clearly headed NFRs and the Glossary file (for example `docs/specs/glossary.md`) with concise term definitions.
    - Enforce concision and DrySpec size limits; refactor existing text if needed instead of appending "notes" sections.
 

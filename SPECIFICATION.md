@@ -64,17 +64,18 @@ The FR specification file:
 - SHALL have: a description from the point of view of the user.
 - SHOULD have: acceptance scenarios, again from the point of view of the user.
   - They MAY use the Gherkin structure.
-  - They SHALL have an identifier to reference in associated executable tests (e.g. `fr-login.md#happy-path`).
+  - They SHALL be referenceable via an identifier derived automatically from the scenario heading using standard Markdown section-link conventions.
+    - Scenario headings SHALL be plain natural language, stable over time, and unique within the file. The heading text is the only in-file identifier.
 - All sections combined, it SHALL describe the expected behavior unambiguously, including the error conditions.
 - MAY have a priority (MoSCoW method) expressed.
 - SHALL have a consistent and semantically meaningful name (for example, avoid generic names like `fr-core.md` in the default layout).
-- Unambiguously identifies the FR. There SHALL NOT be a second canonical identifier listed inside the file. Scenario-level anchors `#happy-path` are fine.
+- Unambiguously identifies the FR. There SHALL NOT be a second canonical identifier listed inside the file. Deep-linking to scenario sections is expected.
 
 ### Non-functional Requirements (NFR)
 
 The software SHALL have non-functional requirements documented (generic layout: `docs/specs/nfr.md`). This is a single file for ease of loading into a coding agent's context.
 
-To allow deep hyperlinking, individual NFRs must have simple, immutable headings.
+To allow stable section linking, individual NFRs must have simple, immutable headings that are unique within the file and written as plain natural language.
 
 Common NFR categories include:
 
